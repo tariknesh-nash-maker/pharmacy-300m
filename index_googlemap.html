@@ -322,8 +322,16 @@ function updateStats(){ const recCount=lastRecs.length; const aoiCount=aoiPolys.
 /* ---------- initMap (GLOBAL) ---------- */
 function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
-    center:{lat:35.7595, lng:-5.8340}, zoom:14, mapTypeControl:false, streetViewControl:false
-  });
+  center: { lat: 35.7595, lng: -5.8340 },
+  zoom: 14,
+  mapTypeId: google.maps.MapTypeId.SATELLITE,   // 👈 default satellite
+  mapTypeControl: true,                         // let users switch if they want
+  mapTypeControlOptions: {
+    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+    position: google.maps.ControlPosition.TOP_RIGHT
+  },
+  streetViewControl: false
+});
 
   // data layers (create AFTER API is loaded)
   circlesData = new google.maps.Data({ map });
