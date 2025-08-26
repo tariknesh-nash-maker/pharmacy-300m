@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pharmacy 300m — AI for Open Governance</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <style>
+    :root { --panelW: 380px; }
+    html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; color: #0f172a; }
+    #map { position: absolute; inset: 56px 0 0 var(--panelW); }
+    header {
+      position: absolute; top: 0; left: 0; right: 0; height: 56px; display: flex; align-items: center; gap: 12px;
+      padding: 0 14px; background: #0f172a; color: white; z-index: 1000;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    header .brand { font-weight: 700; letter-spacing: .2px; }
+    .panel { position: absolute; top: 56px; left: 0; bottom: 0; width: var(--panelW);
+      padding: 16px; overflow-y: auto; background: #fff; border-right: 1px solid #e5e7eb; z-index: 900; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+    .step { margin-bottom: 18px; padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb; }
+    .step b { color: #0f172a; }
+    .legend { position: absolute; right: 10px; bottom: 10px; background: rgba(255,255,255,0.95); padding: 8px 10px; border-radius: 8px; border: 1px solid #e5e7eb; font-size: 12px; z-index: 500; }
+    .legend div { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #9ca3af; }
+    .footer { font-size: 12px; color: #475569; margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 10px; }
+    .langSel { margin-left: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Pharmacy 300m Rule</div>
+    <select id="langSel" class="langSel">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+    </select>
+  </header>
+
+  <div class="panel">
+    <h2 id="stepsTitle">4 Steps to Use</h2>
+    <div class="step"><b id="s1">1. Identify a neighborhood</b><br><span id="s1txt">Draw your area of interest on the map.</span></div>
+    <div class="step"><b id="s2">2. Add existing pharmacies</b><br><span id="s2txt">Click on the map to add pharmacies. Drag to move. Right-click to remove.</span></div>
+    <div class="step"><b id="s3">3. Find recommendations</b><br>
+      <button id="recommendBtn">Find spots</button>
+      <button id="exportAllowedBtn" class="secondary" disabled>Export Allowed</button>
+      <button id="exportRecsBtn" class="secondary" disabled>Export Recs</button>
+    </div>
+    <div class="step"><b id="s4">4. Save for the future</b><br>
+      <button id="saveBtn" class="secondary">Save</button>
+      <button id="loadBtn" class="secondary">Load</button>
+      <button id="exportBtn" class="secondary" disabled>Export Project</button>
+      <input id="importFile" type="file" accept="application/json"/>
+    </div>
+
+    <div id="stats">0 pharmacies • 0 areas</div>
+
+    <div class="footer" id="footerText">
+      <div id="whyTextEn">
+        <p><b>Why this exists:</b> Many laws live in PDFs. This prototype shows how AI + maps can make a rule tangible for citizens and entrepreneurs. Today: the 300 m pharmacy rule. Tomorrow: budgets, access to information, public services.</p>
+        <p><b>Why Open Data Matters:</b> This tool is only possible if the locations of pharmacies are openly available. Open data lets citizens and entrepreneurs verify compliance, helps regulators enforce rules fairly, and enables innovators to build services that make governance tangible.</p>
+        <p><b>Legal context (Morocco):</b> According to Law n°17-04 (Code du médicament et de la pharmacie), Article 57, two pharmacies cannot be opened within 300 meters of each other, except by special authorization from the Ministry of Health. This rule is enforced by regional health authorities.</p>
+        <p><b>Who can benefit:</b> Aspiring pharmacists, existing pharmacists, health authorities, civil society, and the open governance community.</p>
+        <p>Contact us: <a href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>
+      </div>
+      <div id="whyTextFr" style="display:none">
+        <p><b>Pourquoi ce projet :</b> Beaucoup de lois restent enfermées dans des PDF. Ce prototype montre comment l’IA + la cartographie peuvent rendre une règle tangible pour les citoyens et les entrepreneurs. Aujourd’hui : la règle des 300 m entre pharmacies. Demain : budgets, accès à l’information, services publics.</p>
+        <p><b>Pourquoi les données ouvertes comptent :</b> Cet outil n’est possible que si la localisation des pharmacies est accessible. Les données ouvertes permettent aux citoyens et entrepreneurs de vérifier la conformité, aident les autorités sanitaires à appliquer la règle équitablement, et permettent aux innovateurs de créer des services qui rendent la gouvernance concrète.</p>
+        <p><b>Contexte légal (Maroc) :</b> Selon la loi n°17-04 (Code du médicament et de la pharmacie), article 57, deux pharmacies ne peuvent pas être ouvertes à moins de 300 mètres l’une de l’autre, sauf autorisation spéciale du Ministère de la Santé. Cette règle est appliquée par les autorités sanitaires régionales.</p>
+        <p><b>Pour qui ?</b> Porteurs de projet, pharmaciens existants, autorités sanitaires, société civile et la communauté open gov.</p>
+        <p>Contactez-nous : <a href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+  <div class="legend">
+    <div><span class="swatch" style="background:#ef4444"></span> 300 m exclusion</div>
+    <div><span class="swatch" style="background:#10b981"></span> Allowed area</div>
+    <div><span class="swatch" style="background:#3b82f6"></span> Pharmacies</div>
+    <div><span class="swatch" style="background:#f59e0b"></span> Recommendations</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+  <script>
+    const STRINGS = {
+      en: {
+        stepsTitle: "4 Steps to Use",
+        s1: "1. Identify a neighborhood", s1txt: "Draw your area of interest on the map.",
+        s2: "2. Add existing pharmacies", s2txt: "Click on the map to add pharmacies. Drag to move. Right-click to remove.",
+        s3: "3. Find recommendations", s4: "4. Save for the future",
+        findBtn: "Find spots", save: "Save", load: "Load", export: "Export Project", exportRecs: "Export Recs", exportAllowed: "Export Allowed"
+      },
+      fr: {
+        stepsTitle: "4 étapes d'utilisation",
+        s1: "1. Identifier un quartier", s1txt: "Dessinez votre zone d’intérêt sur la carte.",
+        s2: "2. Ajouter les pharmacies existantes", s2txt: "Cliquez sur la carte pour ajouter une pharmacie. Déplacez pour modifier. Clic droit pour supprimer.",
+        s3: "3. Trouver des recommandations", s4: "4. Sauvegarder pour plus tard",
+        findBtn: "Trouver des emplacements", save: "Sauvegarder", load: "Charger", export: "Exporter le projet", exportRecs: "Exporter Recos", exportAllowed: "Exporter zones autorisées"
+      }
+    };
+
+    function setLang(lang) {
+      const S = STRINGS[lang] || STRINGS.en;
+      document.getElementById('stepsTitle').textContent = S.stepsTitle;
+      document.getElementById('s1').textContent = S.s1;
+      document.getElementById('s1txt').textContent = S.s1txt;
+      document.getElementById('s2').textContent = S.s2;
+      document.getElementById('s2txt').textContent = S.s2txt;
+      document.getElementById('s3').textContent = S.s3;
+      document.getElementById('s4').textContent = S.s4;
+      document.getElementById('recommendBtn').textContent = S.findBtn;
+      document.getElementById('saveBtn').textContent = S.save;
+      document.getElementById('loadBtn').textContent = S.load;
+      document.getElementById('exportBtn').textContent = S.export;
+      document.getElementById('exportRecsBtn').textContent = S.exportRecs;
+      document.getElementById('exportAllowedBtn').textContent = S.exportAllowed;
+      document.getElementById('whyTextEn').style.display = (lang==='en')?"block":"none";
+      document.getElementById('whyTextFr').style.display = (lang==='fr')?"block":"none";
+    }
+
+    document.getElementById('langSel').addEventListener('change', e => setLang(e.target.value));
+    setLang('en');
+
+    const map = L.map('map').setView([35.7595, -5.8340], 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 20, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+
+    const pharmaciesLayer = L.featureGroup().addTo(map);
+    const circlesLayer = L.geoJSON(null, { style: { color: '#ef4444', weight: 1, fillOpacity: 0.25 } }).addTo(map);
+    const allowedLayer = L.geoJSON(null, { style: { color: '#10b981', weight: 1, fillOpacity: 0.35 } }).addTo(map);
+    const recsLayer = L.featureGroup().addTo(map);
+    const aoiLayer = new L.FeatureGroup().addTo(map);
+
+    const drawControl = new L.Control.Draw({
+      draw: { polygon: true, rectangle: true, marker: false, polyline: false, circle: false, circlemarker: false },
+      edit: { featureGroup: aoiLayer, remove: true }
+    });
+    map.addControl(drawControl);
+
+    map.on(L.Draw.Event.CREATED, e => { aoiLayer.addLayer(e.layer); computeZones(); });
+    map.on('draw:edited', computeZones);
+    map.on('draw:deleted', computeZones);
+
+    map.on('click', e => addPharmacy(e.latlng));
+
+    function addPharmacy(latlng) {
+      const m = L.marker(latlng, { draggable: true }).addTo(pharmaciesLayer);
+      m.on('contextmenu', () => { pharmaciesLayer.removeLayer(m); computeZones(); updateStats(); saveState(); });
+      m.on('dragend', () => { computeZones(); updateStats(); saveState(); });
+      computeZones(); updateStats(); saveState();
+    }
+
+    const LEGAL_BUFFER_M = 300;
+    const GRID_SPACING_KM = 0.05; // 50 m
+    const MIN_REC_SEP_M = 250;    // avoid overlapping picks
+
+    function computeZones() {
+      circlesLayer.clearLayers(); allowedLayer.clearLayers();
+      const points = toPharmacyFC();
+      // Draw exclusion circles
+      points.features.forEach(f => circlesLayer.addData(turf.circle(f.geometry.coordinates, LEGAL_BUFFER_M / 1000, { units: 'kilometers' })));
+      if (!aoiLayer.getLayers().length) { updateStats(); updateExportButtons(); return; }
+      // Union AOI
+      let aoiUnion = null; aoiLayer.eachLayer(l => { aoiUnion = aoiUnion ? unionSafe(aoiUnion, l.toGeoJSON()) : l.toGeoJSON(); });
+      // Union forbidden
+      let forbidden = null; circlesLayer.eachLayer(l => { forbidden = forbidden ? unionSafe(forbidden, l.toGeoJSON()) : l.toGeoJSON(); });
+      // Allowed = AOI - forbidden
+      let allowed = aoiUnion;
+      if (forbidden) {
+        try { allowed = turf.difference(aoiUnion, forbidden); }
+        catch(_) {
+          circlesLayer.eachLayer(l => { try { const d = turf.difference(allowed, l.toGeoJSON()); if (d) allowed = d; } catch(e){} });
+        }
+      }
+      if (allowed) allowedLayer.addData(allowed);
+      updateStats();
+      updateExportButtons();
+      saveState();
+    }
+
+    function toPharmacyFC(){
+      return turf.featureCollection(pharmaciesLayer.getLayers().map(m => turf.point([m.getLatLng().lng, m.getLatLng().lat])));
+    }
+    function unionSafe(a,b){ try{ return turf.union(a,b); } catch(e){ return tryJitter(a,b); } }
+    function tryJitter(a,b){ try{ return turf.union(turf.buffer(a, 0.0001, {units:'kilometers'}), turf.buffer(b, 0.0001, {units:'kilometers'})); } catch(e){ return null; } }
+
+    // --- Recommendations ---
+    let lastRecs = [];
+    document.getElementById('recommendBtn').addEventListener('click', () => {
+      if (!allowedLayer.getLayers().length) { alert('Draw AOI and add pharmacies first.'); return; }
+      const ph = toPharmacyFC();
+      if (ph.features.length === 0) { alert('Add at least one pharmacy.'); return; }
+      const allowedGJ = allowedLayer.toGeoJSON();
+      const allowedPolys = collectPolygons(allowedGJ);
+      const grid = turf.pointGrid(turf.bbox(allowedGJ), GRID_SPACING_KM, { units: 'kilometers' });
+      // candidates inside any allowed polygon
+      const candidates = grid.features.filter(pt => pointInAnyPolygon(pt, allowedPolys));
+      // score: enforce legal distance, then prefer small average distance to nearby pharmacies (proxy of demand)
+      const K = Math.min(3, ph.features.length);
+      let scored = candidates.map(pt => {
+        const dMin = nearestDistM(pt, ph);
+        const avgK = avgKNearestM(pt, ph, K);
+        return { pt, dMin, avgK };
+      }).filter(r => r.dMin >= LEGAL_BUFFER_M);
+      if (!scored.length) { alert('No legal candidate points found. Try enlarging the AOI.'); recsLayer.clearLayers(); updateExportButtons(); return; }
+      // sort: closer to cluster (smaller avgK is better). Tie-breaker: slightly prefer points just beyond 300m
+      scored.sort((a,b) => (a.avgK - b.avgK) || (a.dMin - b.dMin));
+      // greedy pick with minimum separation
+      const picked = [];
+      for (const r of scored) {
+        let ok = true;
+        for (const p of picked) {
+          const dm = turf.distance(r.pt, p.pt, { units: 'kilometers' }) * 1000;
+          if (dm < MIN_REC_SEP_M) { ok = false; break; }
+        }
+        if (ok) picked.push(r);
+        if (picked.length === 8) break;
+      }
+      // render
+      recsLayer.clearLayers();
+      picked.forEach((r,i) => {
+        const [lng, lat] = r.pt.geometry.coordinates;
+        L.circleMarker([lat,lng], { radius: 8, color: '#f59e0b', weight: 2, fillOpacity: 0.9 })
+          .bindPopup(`Recommendation #${i+1}<br>Nearest pharmacy: ${r.dMin.toFixed(0)} m<br>Avg distance to ${K} nearest: ${r.avgK.toFixed(0)} m`)
+          .addTo(recsLayer);
+        L.marker([lat,lng], { icon: L.divIcon({ className:'', html:`<div style="background:#f59e0b;padding:2px 6px;border-radius:6px;font-weight:700;">#${i+1}</div>` }) }).addTo(recsLayer);
+      });
+      lastRecs = picked;
+      updateStats();
+      updateExportButtons();
+      saveState();
+    });
+
+    function collectPolygons(gj){
+      const polys = [];
+      if (!gj) return polys;
+      if (gj.type === 'FeatureCollection') gj.features.forEach(f => { if (isPoly(f.geometry)) polys.push(f); });
+      else if (gj.type === 'Feature' && isPoly(gj.geometry)) polys.push(gj);
+      else if (isPoly(gj)) polys.push({ type:'Feature', properties:{}, geometry: gj});
+      return polys;
+    }
+    function isPoly(geom){ return geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon'); }
+    function pointInAnyPolygon(pt, polys){ return polys.some(f => turf.booleanPointInPolygon(pt, f)); }
+    function nearestDistM(pt, pointsFC){
+      let best = Infinity; pointsFC.features.forEach(p => { const d = turf.distance(pt,p,{units:'kilometers'})*1000; if (d < best) best = d; });
+      return best;
+    }
+    function avgKNearestM(pt, pointsFC, k){
+      const ds = pointsFC.features.map(p => turf.distance(pt,p,{units:'kilometers'})*1000).sort((a,b)=>a-b);
+      if (ds.length === 0) return Infinity;
+      const kk = Math.min(k, ds.length);
+      let sum = 0; for (let i=0;i<kk;i++) sum += ds[i];
+      return sum / kk;
+    }
+
+    // --- Export buttons ---
+    const exportAllowedBtn = document.getElementById('exportAllowedBtn');
+    const exportRecsBtn = document.getElementById('exportRecsBtn');
+
+    function updateExportButtons(){
+      exportAllowedBtn.disabled = (allowedLayer.getLayers().length === 0);
+      exportRecsBtn.disabled = (lastRecs.length === 0);
+    }
+
+    exportAllowedBtn.addEventListener('click', () => {
+      const gj = allowedLayer.toGeoJSON();
+      const blob = new Blob([JSON.stringify(gj)], { type: 'application/geo+json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'allowed_areas.geojson'; a.click();
+    });
+
+    exportRecsBtn.addEventListener('click', () => {
+      if (!lastRecs.length) return;
+      const fc = turf.featureCollection(lastRecs.map((r,i)=>turf.point(r.pt.geometry.coordinates, {rank:i+1, nearest_m: Number(r.dMin.toFixed(1)), avgK_m: Number(r.avgK.toFixed(1))})));
+      const blob = new Blob([JSON.stringify(fc)], { type: 'application/geo+json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'pharmacy_recommendations.geojson'; a.click();
+    });
+
+    // --- Save/Load/Import/Export Project ---
+    function saveState(){
+      const state = { pharmacies: pharmaciesLayer.getLayers().map(m => m.getLatLng()), aoi: aoiLayer.toGeoJSON(), lang: document.getElementById('langSel').value, recs: lastRecs.map(r=>({lng:r.pt.geometry.coordinates[0], lat:r.pt.geometry.coordinates[1], dMin:r.dMin, avgK:r.avgK})) };
+      localStorage.setItem('pharma300', JSON.stringify(state));
+      document.getElementById('exportBtn').disabled = false;
+    }
+
+    function loadProject(state){
+      try{
+        pharmaciesLayer.clearLayers(); aoiLayer.clearLayers(); recsLayer.clearLayers(); circlesLayer.clearLayers(); allowedLayer.clearLayers();
+        if (state.lang) { document.getElementById('langSel').value = state.lang; setLang(state.lang); }
+        (state.pharmacies||[]).forEach(p => addPharmacy([p.lat,p.lng]));
+        if (state.aoi) L.geoJSON(state.aoi).eachLayer(l => aoiLayer.addLayer(l));
+        computeZones();
+        lastRecs = [];
+        (state.recs||[]).forEach((r,i)=>{
+          const {lat,lng} = r; if (lat==null||lng==null) return;
+          const marker = L.circleMarker([lat,lng], { radius: 8, color: '#f59e0b', weight: 2, fillOpacity: 0.9 })
+            .bindPopup(`Recommendation #${i+1}<br>Nearest pharmacy: ${Number(r.dMin||0).toFixed(0)} m<br>Avg distance: ${Number(r.avgK||0).toFixed(0)} m`)
+            .addTo(recsLayer);
+          L.marker([lat,lng], { icon: L.divIcon({ className:'', html:`<div style=\"background:#f59e0b;padding:2px 6px;border-radius:6px;font-weight:700;\">#${i+1}</div>` }) }).addTo(recsLayer);
+          lastRecs.push({ pt: turf.point([lng,lat]), dMin: r.dMin, avgK: r.avgK });
+        });
+        updateStats(); updateExportButtons();
+      } catch(e){ alert('Failed to load project: '+ e.message); }
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', () => { saveState(); alert('Project saved.'); });
+
+    document.getElementById('loadBtn').addEventListener('click', () => {
+      const raw = localStorage.getItem('pharma300'); if (!raw) return alert('No saved project.');
+      const state = JSON.parse(raw); loadProject(state);
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const raw = localStorage.getItem('pharma300') || JSON.stringify({});
+      const blob = new Blob([raw], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'pharmacy_project.json'; a.click();
+    });
+
+    document.getElementById('importFile').addEventListener('change', async (e) => {
+      const f = e.target.files[0]; if (!f) return;
+      try { const text = await f.text(); const state = JSON.parse(text); localStorage.setItem('pharma300', JSON.stringify(state)); loadProject(state); }
+      catch(err){ alert('Import failed: '+ err.message); }
+    });
+
+    function updateStats() {
+      const recCount = lastRecs.length;
+      document.getElementById('stats').textContent = `${pharmaciesLayer.getLayers().length} pharmacies • ${aoiLayer.getLayers().length} AOIs • ${recCount} recs`;
+    }
+  </script>
+</body>
+</html>
