@@ -5,496 +5,370 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pharmacy 300m — AI for Open Governance (Google Maps)</title>
   <style>
-    :root { --panelW: 420px; }
-    html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; color: #0f172a; }
+    :root { --panelW: 380px; }
+    html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; color: #0f172a; }
     #map { position: absolute; inset: 56px 0 0 var(--panelW); }
-    header { position: absolute; top: 0; left: 0; right: 0; height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 16px; border-bottom: 1px solid #e2e8f0; background: #fff; z-index: 10; }
-    header h1 { font-size: 16px; margin: 0; font-weight: 600; }
-    header .spacer { flex: 1; }
-    header .lang { display: inline-flex; gap: 4px; }
-    header button { height: 32px; padding: 0 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer; }
-    header button.active { background: #0ea5e9; color: #fff; border-color: #0ea5e9; }
-
-    aside { position: absolute; top: 56px; left: 0; bottom: 0; width: var(--panelW); overflow: auto; border-right: 1px solid #e2e8f0; background: #f8fafc; padding: 12px; }
-    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px; margin-bottom: 12px; box-shadow: 0 1px 0 rgba(0,0,0,.02); }
-    .card h2 { margin: 0 0 8px; font-size: 16px; }
-    .muted { color: #475569; font-size: 13px; }
-    .controls { display: grid; gap: 8px; }
-    .controls button, .controls input[type="file"], .controls input[type="text"], .controls select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; background: #fff; }
-    .controls .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .pill { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:#eef2ff; color:#3730a3; font-size:12px; }
-    .badge { display:inline-block; padding:2px 8px; border-radius:999px; background:#dcfce7; color:#166534; font-size:12px; margin-left:6px; }
-    .list { max-height: 120px; overflow: auto; border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px; }
-    .footnote { font-size: 12px; color:#475569; }
-    details { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:10px 12px; }
-    details summary { cursor:pointer; font-weight:600; }
-    .link { color:#0ea5e9; text-decoration:none; }
+    header { position: absolute; top: 0; left: 0; right: 0; height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 14px; background: #0f172a; color: white; z-index: 1000; box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+    header .brand { font-weight: 700; letter-spacing: .2px; }
+    .panel { position: absolute; top: 56px; left: 0; bottom: 0; width: var(--panelW); padding: 16px; overflow-y: auto; background: #fff; border-right: 1px solid #e5e7eb; z-index: 900; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+    .step { margin-bottom: 18px; padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb; }
+    .step b { color: #0f172a; }
+    .legend { position: absolute; right: 10px; bottom: 10px; background: rgba(255,255,255,0.95); padding: 8px 10px; border-radius: 8px; border: 1px solid #e5e7eb; font-size: 12px; z-index: 500; }
+    .legend div { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #9ca3af; }
+    .footer { font-size: 12px; color: #475569; margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 10px; }
+    .langSel { margin-left: auto; }
+    .secondary { background:#fff; border:1px solid #cbd5e1; padding:6px 10px; border-radius:8px; cursor:pointer; }
+    button { cursor:pointer; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Pharmacy 300m — AI for Open Governance (Google Maps)</h1>
-    <div class="spacer"></div>
-    <div class="lang">
-      <button id="btnEn" class="active">EN</button>
-      <button id="btnFr">FR</button>
-    </div>
+    <div class="brand">Pharmacy 300m Rule</div>
+    <select id="langSel" class="langSel">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+    </select>
   </header>
 
-  <aside>
-    <div class="card">
-      <h2 id="step1Title">1) Identify your neighborhood</h2>
-      <div class="controls">
-        <input id="searchBox" type="text" placeholder="Search place or address" />
-        <div class="row">
-          <button id="btnDrawPolygon">Draw area</button>
-          <button id="btnClearPolygon">Clear area</button>
-        </div>
-        <div class="muted" id="step1Help">Use the search to go to an area (Tangier by default). Draw a polygon to focus recommendations.</div>
-      </div>
+  <div class="panel">
+    <h2 id="stepsTitle">4 Steps to Use</h2>
+    <div class="step"><b id="s1">1. Identify a neighborhood</b><br><span id="s1txt">Draw your area of interest on the map.</span></div>
+    <div class="step"><b id="s2">2. Add existing pharmacies</b><br><span id="s2txt">Click on the map to add pharmacies. Drag to move. Right-click to remove.</span></div>
+    <div class="step"><b id="s3">3. Find recommendations</b><br>
+      <button id="recommendBtn">Find spots</button>
+      <button id="exportAllowedBtn" class="secondary" disabled>Export Allowed</button>
+      <button id="exportRecsBtn" class="secondary" disabled>Export Recs</button>
+    </div>
+    <div class="step"><b id="s4">4. Save for the future</b><br>
+      <button id="saveBtn" class="secondary">Save</button>
+      <button id="loadBtn" class="secondary">Load</button>
+      <button id="exportBtn" class="secondary" disabled>Export Project</button>
+      <input id="importFile" type="file" accept=".json,.geojson,application/json"/>
     </div>
 
-    <div class="card">
-      <h2 id="step2Title">2) Add existing pharmacies</h2>
-      <div class="controls">
-        <div class="row">
-          <button id="btnAddPharmacy">Add by clicking map</button>
-          <button id="btnStopAdd">Stop adding</button>
-        </div>
-        <input type="file" id="fileCSV" accept=".csv" />
-        <button id="btnLoadSample">Load sample for Tangier</button>
-        <div class="list" id="pharmacyList"></div>
-        <div class="muted" id="step2Help">Click the map to add a pharmacy, or import a CSV with columns: name,lat,lon. Each pharmacy shows a 300m exclusion circle.</div>
+    <div id="stats">0 pharmacies • 0 areas</div>
+
+    <div class="footer" id="footerText">
+      <div id="whyTextEn">
+        <p><b>Why this exists:</b> Many laws live in PDFs. This prototype shows how AI + maps can make a rule tangible for citizens and entrepreneurs. Today: the 300 m pharmacy rule. Tomorrow: budgets, access to information, public services.</p>
+        <p><b>Why Open Data Matters:</b> This tool is only possible if the locations of pharmacies are openly available. Open data lets citizens and entrepreneurs verify compliance, helps regulators enforce rules fairly, and enables innovators to build services that make governance tangible.</p>
+        <p><b>Legal context (Morocco):</b> According to Law n°17-04 (Code du médicament et de la pharmacie), Article 57, two pharmacies cannot be opened within 300 meters of each other, except by special authorization from the Ministry of Health. This rule is enforced by regional health authorities.</p>
+        <p><b>Who can benefit:</b> Aspiring pharmacists, existing pharmacists, health authorities, civil society, and the open governance community.</p>
+        <p>Contact us: <a href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>
+      </div>
+      <div id="whyTextFr" style="display:none">
+        <p><b>Pourquoi ce projet :</b> Beaucoup de lois restent enfermées dans des PDF. Ce prototype montre comment l’IA + la cartographie peuvent rendre une règle tangible pour les citoyens et les entrepreneurs. Aujourd’hui : la règle des 300 m entre pharmacies. Demain : budgets, accès à l’information, services publics.</p>
+        <p><b>Pourquoi les données ouvertes comptent :</b> Cet outil n’est possible que si la localisation des pharmacies est accessible. Les données ouvertes permettent aux citoyens et entrepreneurs de vérifier la conformité, aident les autorités sanitaires à appliquer la règle équitablement, et permettent aux innovateurs de créer des services qui rendent la gouvernance concrète.</p>
+        <p><b>Contexte légal (Maroc) :</b> Selon la loi n°17-04 (Code du médicament et de la pharmacie), article 57, deux pharmacies ne peuvent pas être ouvertes à moins de 300 mètres l’une de l’autre, sauf autorisation spéciale du Ministère de la Santé. Cette règle est appliquée par les autorités sanitaires régionales.</p>
+        <p><b>Pour qui ?</b> Porteurs de projet, pharmaciens existants, autorités sanitaires, société civile et la communauté open gov.</p>
+        <p>Contactez-nous : <a href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>
       </div>
     </div>
-
-    <div class="card">
-      <h2 id="step3Title">3) Find recommendations</h2>
-      <div class="controls">
-        <div class="row">
-          <label class="pill">Min distance <span id="distLabel">300m</span></label>
-          <select id="kNearest">
-            <option value="3">Score vs 3 nearest</option>
-            <option value="5">Score vs 5 nearest</option>
-            <option value="8">Score vs 8 nearest</option>
-          </select>
-        </div>
-        <div class="row">
-          <input id="numRecs" type="number" min="1" max="200" value="20" />
-          <select id="gridRes">
-            <option value="120">Grid ~120m</option>
-            <option value="200" selected>Grid ~200m</option>
-            <option value="300">Grid ~300m</option>
-          </select>
-        </div>
-        <button id="btnRecommend">Compute recommendations</button>
-        <div class="list" id="recList"></div>
-        <div class="muted" id="step3Help">We propose points that are ≥300m from any existing pharmacy and close to other pharmacies (sign of demand).</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2 id="step4Title">4) Save for the future</h2>
-      <div class="controls">
-        <div class="row">
-          <button id="btnExportPharm">Export pharmacies (CSV)</button>
-          <button id="btnExportRecs">Export recommendations (CSV)</button>
-        </div>
-        <div class="row">
-          <button id="btnExportGeo">Export all (GeoJSON)</button>
-          <button id="btnImportGeo">Import GeoJSON</button>
-        </div>
-        <input type="file" id="fileGeo" accept=".geojson,.json" style="display:none" />
-        <div class="muted" id="step4Help">You can import/export your work to continue later or share with others.</div>
-      </div>
-    </div>
-
-    <details>
-      <summary id="whyTitle">Why this app? Legal context & who benefits</summary>
-      <div class="muted" id="whyText" style="margin-top:8px">
-        <p><strong>Purpose.</strong> Turn the 300m pharmacy distance rule into a citizen-friendly map to help identify viable locations while respecting the law.</p>
-        <p><strong>Legal context (Morocco).</strong> Pharmacies must be spaced at least 300 meters apart. This tool visualizes that rule to support transparent, evidence-based decisions.</p>
-        <p><strong>Who benefits?</strong> Entrepreneurs planning a pharmacy, citizens who want better access to services, and public officials who value openness and data-driven planning.</p>
-        <p><strong>Open data.</strong> When possible, use open, verifiable sources. You can also add known pharmacies manually or via CSV.</p>
-        <p class="footnote">Contact: <a class="link" href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>
-      </div>
-    </details>
-  </aside>
+  </div>
 
   <div id="map"></div>
+  <div class="legend">
+    <div><span class="swatch" style="background:#ef4444"></span> 300 m exclusion</div>
+    <div><span class="swatch" style="background:#10b981"></span> Allowed area</div>
+    <div><span class="swatch" style="background:#3b82f6"></span> Pharmacies</div>
+    <div><span class="swatch" style="background:#f59e0b"></span> Recommendations</div>
+  </div>
+
+  <!-- Turf -->
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
 
   <script>
-    // ---- i18n ----
-    const i18n = {
-      en: {
-        step1Title: "1) Identify your neighborhood",
-        step1Help: "Use the search to go to an area (Tangier by default). Draw a polygon to focus recommendations.",
-        step2Title: "2) Add existing pharmacies",
-        step2Help: "Click the map to add a pharmacy, or import a CSV with columns: name,lat,lon. Each pharmacy shows a 300m exclusion circle.",
-        step3Title: "3) Find recommendations",
-        step3Help: "We propose points that are ≥300m from any existing pharmacy and close to other pharmacies (sign of demand).",
-        step4Title: "4) Save for the future",
-        step4Help: "You can import/export your work to continue later or share with others.",
-        whyTitle: "Why this app? Legal context & who benefits",
-        whyText: `<p><strong>Purpose.</strong> Turn the 300m pharmacy distance rule into a citizen-friendly map to help identify viable locations while respecting the law.</p>
-                  <p><strong>Legal context (Morocco).</strong> Pharmacies must be spaced at least 300 meters apart. This tool visualizes that rule to support transparent, evidence-based decisions.</p>
-                  <p><strong>Who benefits?</strong> Entrepreneurs planning a pharmacy, citizens who want better access to services, and public officials who value openness and data-driven planning.</p>
-                  <p><strong>Open data.</strong> When possible, use open, verifiable sources. You can also add known pharmacies manually or via CSV.</p>
-                  <p class="footnote">Contact: <a class="link" href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>`
-      },
-      fr: {
-        step1Title: "1) Identifier votre quartier",
-        step1Help: "Utilisez la recherche pour vous rendre dans une zone (Tanger par défaut). Dessinez un polygone pour cibler les recommandations.",
-        step2Title: "2) Ajouter les pharmacies existantes",
-        step2Help: "Cliquez sur la carte pour ajouter une pharmacie, ou importez un CSV avec les colonnes : name,lat,lon. Chaque pharmacie affiche un cercle d'exclusion de 300m.",
-        step3Title: "3) Trouver des recommandations",
-        step3Help: "Nous proposons des points situés à ≥300m de toute pharmacie existante et proches d'autres pharmacies (signe de demande).",
-        step4Title: "4) Sauvegarder pour plus tard",
-        step4Help: "Vous pouvez importer/exporter votre travail pour continuer plus tard ou le partager.",
-        whyTitle: "Pourquoi cette application ? Contexte légal & bénéficiaires",
-        whyText: `<p><strong>Objectif.</strong> Transformer la règle des 300m entre pharmacies en une carte accessible aux citoyens, afin d'identifier des emplacements viables tout en respectant la loi.</p>
-                  <p><strong>Contexte légal (Maroc).</strong> Les pharmacies doivent être espacées d'au moins 300 mètres. Cet outil visualise cette règle pour soutenir des décisions transparentes et fondées sur les données.</p>
-                  <p><strong>Qui en bénéficie ?</strong> Les entrepreneurs qui planifient une pharmacie, les citoyens souhaitant un meilleur accès aux services, et les responsables publics attachés à l'ouverture et à l'aide à la décision.</p>
-                  <p><strong>Données ouvertes.</strong> Dans la mesure du possible, utilisez des sources ouvertes et vérifiables. Vous pouvez aussi ajouter des pharmacies manuellement ou via CSV.</p>
-                  <p class="footnote">Contact : <a class="link" href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>`
-      }
-    };
+/* ---------- DOM refs FIRST ---------- */
+const stepsTitle = document.getElementById('stepsTitle');
+const s1 = document.getElementById('s1');
+const s1txt = document.getElementById('s1txt');
+const s2 = document.getElementById('s2');
+const s2txt = document.getElementById('s2txt');
+const s3 = document.getElementById('s3');
+const s4 = document.getElementById('s4');
+const recommendBtn = document.getElementById('recommendBtn');
+const saveBtn = document.getElementById('saveBtn');
+const loadBtn = document.getElementById('loadBtn');
+const exportBtn = document.getElementById('exportBtn');
+const exportRecsBtn = document.getElementById('exportRecsBtn');
+const exportAllowedBtn = document.getElementById('exportAllowedBtn');
+const langSel = document.getElementById('langSel');
+const whyTextEn = document.getElementById('whyTextEn');
+const whyTextFr = document.getElementById('whyTextFr');
 
-    function setLang(lang) {
-      const t = i18n[lang];
-      document.getElementById('step1Title').textContent = t.step1Title;
-      document.getElementById('step1Help').textContent = t.step1Help;
-      document.getElementById('step2Title').textContent = t.step2Title;
-      document.getElementById('step2Help').textContent = t.step2Help;
-      document.getElementById('step3Title').textContent = t.step3Title;
-      document.getElementById('step3Help').textContent = t.step3Help;
-      document.getElementById('step4Title').textContent = t.step4Title;
-      document.getElementById('step4Help').textContent = t.step4Help;
-      document.getElementById('whyTitle').textContent = t.whyTitle;
-      document.getElementById('whyText').innerHTML = t.whyText;
-      document.getElementById('btnEn').classList.toggle('active', lang==='en');
-      document.getElementById('btnFr').classList.toggle('active', lang==='fr');
+/* ---------- i18n ---------- */
+const STRINGS = {
+  en: { stepsTitle:"4 Steps to Use", s1:"1. Identify a neighborhood", s1txt:"Draw your area of interest on the map.",
+        s2:"2. Add existing pharmacies", s2txt:"Click on the map to add pharmacies. Drag to move. Right-click to remove.",
+        s3:"3. Find recommendations", s4:"4. Save for the future",
+        findBtn:"Find spots", save:"Save", load:"Load", export:"Export Project", exportRecs:"Export Recs", exportAllowed:"Export Allowed" },
+  fr: { stepsTitle:"4 étapes d'utilisation", s1:"1. Identifier un quartier", s1txt:"Dessinez votre zone d’intérêt sur la carte.",
+        s2:"2. Ajouter les pharmacies existantes", s2txt:"Cliquez sur la carte pour ajouter une pharmacie. Déplacez pour modifier. Clic droit pour supprimer.",
+        s3:"3. Trouver des recommandations", s4:"4. Sauvegarder pour plus tard",
+        findBtn:"Trouver des emplacements", save:"Sauvegarder", load:"Charger", export:"Exporter le projet", exportRecs:"Exporter Recos", exportAllowed:"Exporter zones autorisées" }
+};
+function setLangUI(lang){
+  const S = STRINGS[lang] || STRINGS.en;
+  stepsTitle.textContent = S.stepsTitle;
+  s1.textContent = S.s1; s1txt.textContent = S.s1txt;
+  s2.textContent = S.s2; s2txt.textContent = S.s2txt;
+  s3.textContent = S.s3; s4.textContent = S.s4;
+  recommendBtn.textContent = S.findBtn;
+  saveBtn.textContent = S.save; loadBtn.textContent = S.load; exportBtn.textContent = S.export;
+  exportRecsBtn.textContent = S.exportRecs; exportAllowedBtn.textContent = S.exportAllowed;
+  whyTextEn.style.display = (lang === 'en') ? 'block' : 'none';
+  whyTextFr.style.display = (lang === 'fr') ? 'block' : 'none';
+}
+langSel.addEventListener('change', e => setLangUI(e.target.value));
+setLangUI('en');
+
+/* ---------- Globals ---------- */
+let map, drawingManager;
+let circlesData, allowedData;            // created inside initMap()
+const pharmacies = [];                   // [{marker, lat, lng}]
+const aoiPolys = [];                     // [google.maps.Polygon]
+const recsMarkers = [];                  // markers for recommendations
+const LEGAL_BUFFER_M = 300;
+const GRID_SPACING_KM = 0.05;            // 50m
+const MIN_REC_SEP_M = 250;
+
+/* ---------- Helpers ---------- */
+function pharmaciesToFC(){
+  return turf.featureCollection(pharmacies.map(p =>
+    turf.point([p.marker.getPosition().lng(), p.marker.getPosition().lat()])
+  ));
+}
+function aoiToFC(){
+  const feats = aoiPolys.map(poly => {
+    const path = poly.getPath().getArray().map(pt => [pt.lng(), pt.lat()]);
+    if (path.length && (path[0][0] !== path[path.length-1][0] || path[0][1] !== path[path.length-1][1])) {
+      path.push(path[0]);
     }
+    return turf.polygon([path]);
+  });
+  return turf.featureCollection(feats);
+}
+function renderGeoJSON(dataLayer, geojson){
+  dataLayer.forEach(f => dataLayer.remove(f));
+  if (!geojson) return;
+  if (geojson.type === 'FeatureCollection') geojson.features.forEach(f => dataLayer.addGeoJson(f));
+  else dataLayer.addGeoJson(geojson);
+}
+function tryUnionJitter(a, b){
+  try { return turf.union(a, b); }
+  catch(e){
+    try { return turf.union(turf.buffer(a,1e-4,{units:'kilometers'}), turf.buffer(b,1e-4,{units:'kilometers'})); }
+    catch{ return a; }
+  }
+}
+function computeZones(){
+  if (!circlesData || !allowedData) return; // not ready until initMap runs
+  renderGeoJSON(circlesData, null);
+  renderGeoJSON(allowedData, null);
 
-    // ---- Map + Data ----
-    let map, places, drawingManager;
-    let addMode = false;
-    const pharmacies = []; // {name, lat, lon, marker, circle}
-    const recommendations = []; // {lat, lon, score, marker}
-    let areaPolygon = null;
+  const phFC = pharmaciesToFC();
+  const circles = phFC.features.map(f => turf.circle(f.geometry.coordinates, LEGAL_BUFFER_M/1000, { units:'kilometers' }));
+  const circlesFC = turf.featureCollection(circles);
+  renderGeoJSON(circlesData, circlesFC);
 
-    // meters <-> degrees helpers
-    function metersToLat(m) { return m / 111320; }
-    function metersToLon(m, lat) { return m / (40075000 * Math.cos(lat * Math.PI/180) / 360); }
+  if (!aoiPolys.length) { updateExportButtons(); return; }
 
-    function haversineMeters(a, b) {
-      const R = 6371000;
-      const dLat = (b.lat - a.lat) * Math.PI/180;
-      const dLon = (b.lon - a.lon) * Math.PI/180;
-      const lat1 = a.lat * Math.PI/180;
-      const lat2 = b.lat * Math.PI/180;
-      const sinDLat = Math.sin(dLat/2), sinDLon = Math.sin(dLon/2);
-      const c = 2 * Math.asin(Math.sqrt(sinDLat*sinDLat + Math.cos(lat1)*Math.cos(lat2)*sinDLon*sinDLon));
-      return R * c;
-    }
+  const aoiFC = aoiToFC();
+  let aoiUnion = aoiFC.features[0];
+  for (let i=1; i<aoiFC.features.length; i++) aoiUnion = tryUnionJitter(aoiUnion, aoiFC.features[i]);
 
-    function addPharmacy(lat, lon, name = 'Pharmacy') {
-      const pos = { lat, lng: lon };
-      const marker = new google.maps.Marker({ position: pos, map, title: name, icon: { path: google.maps.SymbolPath.CIRCLE, scale: 6, fillColor: '#1f2937', fillOpacity: 1, strokeColor: '#111827', strokeWeight: 1 } });
-      const circle = new google.maps.Circle({ map, center: pos, radius: 300, fillOpacity: 0.08, strokeOpacity: 0.4, strokeWeight: 1, strokeColor: '#ef4444', fillColor: '#ef4444' });
-      const item = { name, lat, lon, marker, circle };
-      pharmacies.push(item);
-      refreshPharmacyList();
-      return item;
-    }
+  let forbidden = circlesFC.features[0] || null;
+  for (let i=1; i<circlesFC.features.length; i++) forbidden = forbidden ? tryUnionJitter(forbidden, circlesFC.features[i]) : circlesFC.features[i];
 
-    function refreshPharmacyList() {
-      const box = document.getElementById('pharmacyList');
-      box.innerHTML = '';
-      pharmacies.forEach((p, i) => {
-        const div = document.createElement('div');
-        div.style.display = 'flex';
-        div.style.justifyContent = 'space-between';
-        div.style.alignItems = 'center';
-        div.style.padding = '6px 4px';
-        div.style.borderBottom = '1px solid #e2e8f0';
-        div.innerHTML = `<span>${i+1}. ${p.name} <span class="badge">${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}</span></span>`;
-        const del = document.createElement('button');
-        del.textContent = '✕';
-        del.style.border = '1px solid #cbd5e1';
-        del.style.borderRadius = '8px';
-        del.style.background = '#fff';
-        del.style.cursor = 'pointer';
-        del.onclick = () => { p.marker.setMap(null); p.circle.setMap(null); pharmacies.splice(i,1); refreshPharmacyList(); };
-        div.appendChild(del);
-        box.appendChild(div);
-      });
-    }
+  let allowed = aoiUnion;
+  if (forbidden) {
+    try { allowed = turf.difference(aoiUnion, forbidden); }
+    catch{ for (const f of circlesFC.features) { try { const d = turf.difference(allowed, f); if (d) allowed = d; } catch{} } }
+  }
+  if (allowed) renderGeoJSON(allowedData, allowed);
+  updateExportButtons();
+}
+function addPharmacy(lat, lng){
+  const marker = new google.maps.Marker({
+    map, position:{lat, lng}, draggable:true,
+    icon:{ path: google.maps.SymbolPath.CIRCLE, scale:6, fillColor:'#3b82f6', fillOpacity:1, strokeColor:'#1e40af', strokeWeight:1 }
+  });
+  marker.addListener('rightclick', () => {
+    marker.setMap(null);
+    const i = pharmacies.findIndex(p => p.marker === marker);
+    if (i > -1) pharmacies.splice(i,1);
+    computeZones(); updateStats(); saveState();
+  });
+  marker.addListener('dragend', () => { computeZones(); updateStats(); saveState(); });
+  pharmacies.push({ marker, lat, lng });
+  computeZones(); updateStats(); saveState();
+}
 
-    function refreshRecList() {
-      const box = document.getElementById('recList');
-      box.innerHTML = '';
-      recommendations.forEach((r, i) => {
-        const div = document.createElement('div');
-        div.style.display = 'flex';
-        div.style.justifyContent = 'space-between';
-        div.style.alignItems = 'center';
-        div.style.padding = '6px 4px';
-        div.style.borderBottom = '1px solid #e2e8f0';
-        div.innerHTML = `<span>${i+1}. <strong>${r.score.toFixed(0)}</strong> <span class="badge">${r.lat.toFixed(5)}, ${r.lon.toFixed(5)}</span></span>`;
-        const fly = document.createElement('button');
-        fly.textContent = '↗';
-        fly.style.border = '1px solid #cbd5e1';
-        fly.style.borderRadius = '8px';
-        fly.style.background = '#fff';
-        fly.style.cursor = 'pointer';
-        fly.onclick = () => { map.panTo({lat: r.lat, lng: r.lon}); map.setZoom(17); };
-        div.appendChild(fly);
-        box.appendChild(div);
-      });
-    }
+/* ---------- Recommendations ---------- */
+let lastRecs = [];
+function clearRecs(){ recsMarkers.forEach(m => { m.setMap(null); if (m._label) m._label.setMap(null); }); recsMarkers.length = 0; }
+function labelSVG(n){
+  return `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='22'><rect rx='6' ry='6' width='40' height='22' fill='%23f59e0b'/><text x='20' y='15' font-size='12' font-family='system-ui, sans-serif' text-anchor='middle' fill='white' font-weight='700'>#${n}</text></svg>`;
+}
+function nearestDistM(pt, pointsFC){ let best=Infinity; pointsFC.features.forEach(p=>{ const d=turf.distance(pt,p,{units:'kilometers'})*1000; if(d<best) best=d; }); return best; }
+function avgKNearestM(pt, pointsFC, k){ const ds=pointsFC.features.map(p=>turf.distance(pt,p,{units:'kilometers'})*1000).sort((a,b)=>a-b); const kk=Math.min(k,ds.length); let s=0; for(let i=0;i<kk;i++) s+=ds[i]; return s/kk; }
+function collectPolygons(gj){
+  const out=[]; const pushPoly=coords=>out.push(turf.polygon(coords)); if(!gj) return out;
+  if(gj.type==='FeatureCollection'){ gj.features.forEach(f=>{ const g=f.geometry; if(!g) return; if(g.type==='Polygon') pushPoly(g.coordinates); if(g.type==='MultiPolygon') g.coordinates.forEach(pushPoly); }); }
+  else if(gj.type==='Feature'){ const g=gj.geometry; if(g?.type==='Polygon') pushPoly(g.coordinates); if(g?.type==='MultiPolygon') g.coordinates.forEach(pushPoly); }
+  else if(gj.type==='Polygon'||gj.type==='MultiPolygon'){ return collectPolygons({type:'Feature',geometry:gj}); }
+  return out;
+}
+document.getElementById('recommendBtn').addEventListener('click', () => {
+  if (!aoiPolys.length || pharmacies.length === 0) { alert('Draw AOI and add pharmacies first.'); return; }
+  let allowedGJ=null; allowedData.toGeoJson(gj=>{ allowedGJ=gj; });
+  setTimeout(()=>{ // allow toGeoJson callback to run
+    if(!allowedGJ){ alert('No allowed area.'); return; }
+    const ph=pharmaciesToFC();
+    const grid=turf.pointGrid(turf.bbox(allowedGJ), GRID_SPACING_KM, {units:'kilometers'});
+    const polys=collectPolygons(allowedGJ);
+    const candidates=grid.features.filter(pt=>polys.some(pg=>turf.booleanPointInPolygon(pt,pg)));
+    const K=Math.min(3, ph.features.length);
+    let scored=candidates.map(pt=>({ pt, dMin:nearestDistM(pt,ph), avgK:avgKNearestM(pt,ph,K) })).filter(r=>r.dMin>=LEGAL_BUFFER_M);
+    if(!scored.length){ alert('No legal candidate points found. Try enlarging the AOI.'); clearRecs(); updateExportButtons(); return; }
+    scored.sort((a,b)=>(a.avgK-b.avgK)||(a.dMin-b.dMin));
+    const picked=[]; for(const r of scored){ let ok=true; for(const p of picked){ const dm=turf.distance(r.pt,p.pt,{units:'kilometers'})*1000; if(dm<MIN_REC_SEP_M){ ok=false; break; } } if(ok) picked.push(r); if(picked.length===8) break; }
+    clearRecs();
+    picked.forEach((r,i)=>{ const [lng,lat]=r.pt.geometry.coordinates;
+      const m=new google.maps.Marker({ map, position:{lat,lng}, icon:{ path:google.maps.SymbolPath.CIRCLE, scale:7, fillColor:'#f59e0b', fillOpacity:1, strokeColor:'#b45309', strokeWeight:2 }, title:`Recommendation #${i+1}` });
+      const lbl=new google.maps.Marker({ map, position:{lat,lng}, icon:{ url:`data:image/svg+xml;utf8,${encodeURIComponent(labelSVG(i+1))}` }, clickable:false });
+      m._label=lbl; recsMarkers.push(m);
+      const info=new google.maps.InfoWindow({ content:`<div>Recommendation #${i+1}<br>Nearest pharmacy: ${r.dMin.toFixed(0)} m<br>Avg distance to ${Math.min(3,pharmacies.length)} nearest: ${r.avgK.toFixed(0)} m</div>` });
+      m.addListener('click', ()=>info.open({map, anchor:m}));
+    });
+    lastRecs=picked; updateStats(); updateExportButtons(); saveState();
+  },0);
+});
 
-    function clearRecommendations() {
-      recommendations.splice(0, recommendations.length).forEach(r => r.marker.setMap(null));
-      refreshRecList();
-    }
+/* ---------- Export buttons ---------- */
+function updateExportButtons(){
+  if (!allowedData) { exportAllowedBtn.disabled = true; exportRecsBtn.disabled = (lastRecs.length===0); return; }
+  let hasAllowed=false; allowedData.forEach(()=>{ hasAllowed=true; });
+  exportAllowedBtn.disabled=!hasAllowed;
+  exportRecsBtn.disabled=(lastRecs.length===0);
+}
+exportAllowedBtn.addEventListener('click', () => {
+  if (!allowedData) return;
+  allowedData.toGeoJson(gj => {
+    const blob = new Blob([JSON.stringify(gj)], { type: 'application/geo+json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'allowed_areas.geojson'; a.click();
+    URL.revokeObjectURL(url);
+  });
+});
+exportRecsBtn.addEventListener('click', () => {
+  if (!lastRecs.length) return;
+  const fc = turf.featureCollection(lastRecs.map((r,i)=>turf.point(r.pt.geometry.coordinates,{rank:i+1, nearest_m:Number(r.dMin.toFixed(1)), avgK_m:Number(r.avgK.toFixed(1))})));
+  const blob = new Blob([JSON.stringify(fc)], { type: 'application/geo+json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'pharmacy_recommendations.geojson'; a.click();
+  URL.revokeObjectURL(url);
+});
 
-    function computeRecommendations() {
-      clearRecommendations();
-      if (pharmacies.length === 0) return alert('Add pharmacies first.');
-      const minDist = 300; // meters (kept fixed for law); UI label only
-      const k = parseInt(document.getElementById('kNearest').value, 10);
-      const n = Math.max(1, Math.min(200, parseInt(document.getElementById('numRecs').value, 10) || 20));
-      const gridM = parseInt(document.getElementById('gridRes').value, 10);
+/* ---------- Save / Load / Import / Export ---------- */
+function saveState(){
+  const state = {
+    pharmacies: pharmacies.map(p => ({ lat: p.marker.getPosition().lat(), lng: p.marker.getPosition().lng() })),
+    aoi: aoiToFC(),
+    lang: langSel.value,
+    recs: lastRecs.map(r => ({ lng: r.pt.geometry.coordinates[0], lat: r.pt.geometry.coordinates[1], dMin: r.dMin, avgK: r.avgK }))
+  };
+  localStorage.setItem('pharma300', JSON.stringify(state));
+  exportBtn.disabled = false;
+}
+function loadProject(state){
+  try{
+    pharmacies.splice(0).forEach(p=>p.marker.setMap(null));
+    aoiPolys.splice(0).forEach(p=>p.setMap(null));
+    if (circlesData && allowedData) { renderGeoJSON(circlesData,null); renderGeoJSON(allowedData,null); }
+    clearRecs();
 
-      // Determine candidate area: polygon if provided, else current map bounds
-      let bounds;
-      if (areaPolygon) bounds = areaPolygon.getBounds();
-      else bounds = map.getBounds();
-      if (!bounds) return alert('Zoom to an area first.');
-
-      const ne = bounds.getNorthEast();
-      const sw = bounds.getSouthWest();
-      const minLat = sw.lat(); const maxLat = ne.lat();
-      const minLon = sw.lng(); const maxLon = ne.lng();
-
-      // Grid step in degrees
-      const stepLat = metersToLat(gridM);
-      // Use center latitude to compute lon step
-      const centerLat = (minLat + maxLat)/2;
-      const stepLon = metersToLon(gridM, centerLat);
-
-      function pointInPolygon(lat, lon) {
-        if (!areaPolygon) return true;
-        const path = areaPolygon.getPath();
-        // Ray-casting algorithm
-        let inside = false;
-        const x = lon, y = lat;
-        for (let i=0, j=path.getLength()-1; i<path.getLength(); j=i++) {
-          const xi = path.getAt(i).lng(), yi = path.getAt(i).lat();
-          const xj = path.getAt(j).lng(), yj = path.getAt(j).lat();
-          const intersect = ((yi>y) !== (yj>y)) && (x < (xj - xi) * (y - yi) / (yj - yi + 1e-12) + xi);
-          if (intersect) inside = !inside;
-        }
-        return inside;
-      }
-
-      const cands = [];
-      for (let lat = minLat; lat <= maxLat; lat += stepLat) {
-        for (let lon = minLon; lon <= maxLon; lon += stepLon) {
-          if (!pointInPolygon(lat, lon)) continue;
-          const cand = {lat, lon};
-          // Distance to nearest existing pharmacy
-          let minD = Infinity;
-          const dists = [];
-          for (const p of pharmacies) {
-            const d = haversineMeters({lat, lon}, {lat: p.lat, lon: p.lon});
-            dists.push(d);
-            if (d < minD) minD = d;
-          }
-          if (minD < minDist) continue; // violates 300m rule
-
-          // Score by proximity to clusters: sum of k nearest distances (smaller is better)
-          dists.sort((a,b)=>a-b);
-          const score = dists.slice(0, k).reduce((s,v)=>s+v, 0);
-          cands.push({lat, lon, score});
-        }
-      }
-
-      cands.sort((a,b)=>a.score - b.score);
-      const chosen = cands.slice(0, n);
-      chosen.forEach((c, idx) => {
-        const marker = new google.maps.Marker({ position: {lat:c.lat, lng:c.lon}, map, title: `Recommendation #${idx+1} (score ${c.score.toFixed(0)})`, icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#10b981', fillOpacity: 1, strokeColor: '#065f46', strokeWeight: 1 }});
-        const circle = new google.maps.Circle({ map, center: {lat:c.lat, lng:c.lon}, radius: 300, fillOpacity: 0.06, strokeOpacity: 0.4, strokeWeight: 1, strokeColor: '#22c55e', fillColor: '#22c55e' });
-        marker._circle = circle;
-        recommendations.push({ ...c, marker });
-      });
-      refreshRecList();
-    }
-
-    function exportCSV(rows, header = ['name','lat','lon']) {
-      const lines = [header.join(',')];
-      for (const r of rows) lines.push([r.name||'', r.lat, r.lon].join(','));
-      const blob = new Blob([lines.join('\n')], {type:'text/csv'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'pharmacies.csv'; a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function exportRecsCSV() {
-      const lines = ['lat,lon,score'];
-      for (const r of recommendations) lines.push([r.lat, r.lon, r.score.toFixed(2)].join(','));
-      const blob = new Blob([lines.join('\n')], {type:'text/csv'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'recommendations.csv'; a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function exportGeoJSON() {
-      const fc = { type: 'FeatureCollection', features: [] };
-      pharmacies.forEach(p=>{
-        fc.features.push({ type:'Feature', properties:{type:'pharmacy', name:p.name}, geometry:{ type:'Point', coordinates:[p.lon, p.lat] } });
-      });
-      recommendations.forEach(r=>{
-        fc.features.push({ type:'Feature', properties:{type:'recommendation', score:r.score}, geometry:{ type:'Point', coordinates:[r.lon, r.lat] } });
-      });
-      if (areaPolygon) {
-        const coords = areaPolygon.getPath().getArray().map(pt=>[pt.lng(), pt.lat()]);
-        coords.push([coords[0][0], coords[0][1]]);
-        fc.features.push({ type:'Feature', properties:{type:'area'}, geometry:{ type:'Polygon', coordinates:[coords] } });
-      }
-      const blob = new Blob([JSON.stringify(fc)], {type:'application/geo+json'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href=url; a.download='pharmacy300m.geojson'; a.click(); URL.revokeObjectURL(url);
-    }
-
-    function importGeoJSON(obj) {
-      // Clear existing markers/circles
-      pharmacies.splice(0).forEach(p=>{ p.marker.setMap(null); p.circle.setMap(null); });
-      clearRecommendations();
-      if (areaPolygon) { areaPolygon.setMap(null); areaPolygon = null; }
-
-      if (obj.type === 'FeatureCollection') {
-        obj.features.forEach(f => {
-          const [lon, lat] = f.geometry.coordinates;
-          if (f.geometry.type === 'Point' && f.properties?.type === 'pharmacy') addPharmacy(lat, lon, f.properties.name || 'Pharmacy');
-          if (f.geometry.type === 'Point' && f.properties?.type === 'recommendation') {
-            const marker = new google.maps.Marker({ position:{lat, lng:lon}, map, title:`Imported recommendation (${(f.properties.score||0).toFixed?.(0)??''})`, icon:{ path: google.maps.SymbolPath.CIRCLE, scale:7, fillColor:'#10b981', fillOpacity:1, strokeColor:'#065f46', strokeWeight:1 } });
-            const circle = new google.maps.Circle({ map, center:{lat, lng:lon}, radius:300, fillOpacity:0.06, strokeOpacity:0.4, strokeWeight:1, strokeColor:'#22c55e', fillColor:'#22c55e' });
-            marker._circle = circle;
-            recommendations.push({ lat, lon, score: f.properties.score||0, marker });
-          }
-          if (f.geometry.type === 'Polygon' && f.properties?.type === 'area') {
-            const path = (f.geometry.coordinates?.[0]||[]).map(([x,y])=>({lat:y, lng:x}));
-            areaPolygon = new google.maps.Polygon({ map, paths: path, fillColor:'#93c5fd', fillOpacity:0.1, strokeColor:'#3b82f6', strokeOpacity:0.8, strokeWeight:2 });
-          }
-        });
-      }
-      refreshPharmacyList();
-      refreshRecList();
-    }
-
-    function handleCSVFile(file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const lines = reader.result.split(/\r?\n/).filter(Boolean);
-        // detect header
-        let start = 0; let hasHeader = false;
-        if (/name/i.test(lines[0]) && /lat/i.test(lines[0]) && /(lon|lng)/i.test(lines[0])) { hasHeader = true; start = 1; }
-        for (let i=start; i<lines.length; i++) {
-          const parts = lines[i].split(',');
-          if (parts.length < 3) continue;
-          const name = parts[0].trim();
-          const lat = parseFloat(parts[1]);
-          const lon = parseFloat(parts[2]);
-          if (Number.isFinite(lat) && Number.isFinite(lon)) addPharmacy(lat, lon, name || `Pharmacy ${i-start+1}`);
-        }
-      };
-      reader.readAsText(file);
-    }
-
-    function exportPharmaciesCSV() {
-      exportCSV(pharmacies.map(p=>({name:p.name, lat:p.lat, lon:p.lon})));
-    }
-
-    // Sample tiny dataset for Tangier (few points)
-    const samplePharmacies = [
-      {name:'Pharmacie Place des Nations', lat:35.78355, lon:-5.80956},
-      {name:'Pharmacie Moghogha', lat:35.74867, lon:-5.83170},
-      {name:'Pharmacie IBN Batouta', lat:35.78064, lon:-5.80984},
-      {name:'Pharmacie Souani', lat:35.73985, lon:-5.84110},
-      {name:'Pharmacie Malabata', lat:35.78799, lon:-5.78041}
-    ];
-
-    // ---- Google Maps init ----
-    window.initMap = function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 35.759, lng: -5.834 }, // Tangier
-        zoom: 13,
-        mapTypeControl: false,
-        streetViewControl: false
-      });
-
-      // Places search
-      const input = document.getElementById('searchBox');
-      const ac = new google.maps.places.Autocomplete(input, { fields: ['geometry','name'] });
-      ac.addListener('place_changed', () => {
-        const place = ac.getPlace();
-        if (place?.geometry?.location) {
-          map.panTo(place.geometry.location);
-          map.setZoom(15);
+    if (state.lang) { langSel.value = state.lang; setLangUI(state.lang); }
+    (state.pharmacies||[]).forEach(p=>addPharmacy(p.lat,p.lng));
+    if (state.aoi){
+      (state.aoi.features||[]).forEach(f=>{
+        if (f.geometry?.type==='Polygon'){
+          const path=f.geometry.coordinates[0].map(([x,y])=>({lat:y,lng:x}));
+          const poly=new google.maps.Polygon({ map, paths:path, fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 });
+          poly.addListener('rightclick', ()=>{ poly.setMap(null); const i=aoiPolys.indexOf(poly); if(i>-1) aoiPolys.splice(i,1); computeZones(); updateStats(); saveState(); });
+          aoiPolys.push(poly);
         }
       });
+    }
+    computeZones();
+    lastRecs=[]; (state.recs||[]).forEach(r=>{ lastRecs.push({ pt:turf.point([r.lng,r.lat]), dMin:r.dMin||0, avgK:r.avgK||0 }); });
+    if (lastRecs.length){ clearRecs(); lastRecs.forEach((r,i)=>{ const [lng,lat]=r.pt.geometry.coordinates;
+      const m=new google.maps.Marker({ map, position:{lat,lng}, icon:{ path:google.maps.SymbolPath.CIRCLE, scale:7, fillColor:'#f59e0b', fillOpacity:1, strokeColor:'#b45309', strokeWeight:2 }, title:`Recommendation #${i+1}` });
+      const lbl=new google.maps.Marker({ map, position:{lat,lng}, icon:{ url:`data:image/svg+xml;utf8,${encodeURIComponent(labelSVG(i+1))}` }, clickable:false });
+      m._label=lbl; recsMarkers.push(m);
+    }); }
+    updateStats(); updateExportButtons();
+  }catch(e){ alert('Failed to load project: '+e.message); }
+}
+saveBtn.addEventListener('click', ()=>{ saveState(); alert('Project saved.'); });
+loadBtn.addEventListener('click', ()=>{ const raw=localStorage.getItem('pharma300'); if(!raw) return alert('No saved project.'); loadProject(JSON.parse(raw)); });
+exportBtn.addEventListener('click', ()=>{ const raw=localStorage.getItem('pharma300')||'{}'; const blob=new Blob([raw],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='pharmacy_project.json'; a.click(); URL.revokeObjectURL(url); });
+document.getElementById('importFile').addEventListener('change', async (e)=>{ const f=e.target.files[0]; if(!f) return; try{ const txt=await f.text(); const state=JSON.parse(txt); localStorage.setItem('pharma300', JSON.stringify(state)); loadProject(state); } catch(err){ alert('Import failed: '+err.message); } });
 
-      // Drawing manager
-      drawingManager = new google.maps.drawing.DrawingManager({
-        drawingControl: false,
-        polygonOptions: { fillColor:'#93c5fd', fillOpacity:0.1, strokeColor:'#3b82f6', strokeOpacity:0.8, strokeWeight:2 }
-      });
-      drawingManager.setMap(map);
+function updateStats(){ const recCount=lastRecs.length; const aoiCount=aoiPolys.length; document.getElementById('stats').textContent = `${pharmacies.length} pharmacies • ${aoiCount} AOIs • ${recCount} recs`; }
 
-      google.maps.event.addListener(drawingManager, 'polygoncomplete', (polygon) => {
-        if (areaPolygon) areaPolygon.setMap(null);
-        areaPolygon = polygon;
-      });
+/* ---------- initMap (GLOBAL) ---------- */
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:{lat:35.7595, lng:-5.8340}, zoom:14, mapTypeControl:false, streetViewControl:false
+  });
 
-      // Map click add mode
-      map.addListener('click', (e) => {
-        if (!addMode) return;
-        const name = prompt('Pharmacy name? (optional)') || 'Pharmacy';
-        addPharmacy(e.latLng.lat(), e.latLng.lng(), name);
-      });
+  // data layers (create AFTER API is loaded)
+  circlesData = new google.maps.Data({ map });
+  circlesData.setStyle({ fillOpacity:0.25, strokeColor:'#ef4444', fillColor:'#ef4444', strokeWeight:1 });
+  allowedData = new google.maps.Data({ map });
+  allowedData.setStyle({ fillOpacity:0.35, strokeColor:'#10b981', fillColor:'#10b981', strokeWeight:1 });
 
-      // UI wiring
-      document.getElementById('btnDrawPolygon').onclick = () => {
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
-      };
-      document.getElementById('btnClearPolygon').onclick = () => {
-        if (areaPolygon) { areaPolygon.setMap(null); areaPolygon = null; }
-      };
-      document.getElementById('btnAddPharmacy').onclick = () => { addMode = true; };
-      document.getElementById('btnStopAdd').onclick = () => { addMode = false; };
-      document.getElementById('fileCSV').onchange = (e) => { const f = e.target.files[0]; if (f) handleCSVFile(f); };
-      document.getElementById('btnLoadSample').onclick = () => { samplePharmacies.forEach(p=>addPharmacy(p.lat, p.lon, p.name)); };
+  // drawing tools
+  drawingManager = new google.maps.drawing.DrawingManager({
+    drawingControl:true,
+    drawingControlOptions:{ position:google.maps.ControlPosition.TOP_LEFT, drawingModes:['polygon','rectangle'] },
+    polygonOptions:{ fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 },
+    rectangleOptions:{ fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 }
+  });
+  drawingManager.setMap(map);
 
-      document.getElementById('btnRecommend').onclick = computeRecommendations;
-      document.getElementById('btnExportPharm').onclick = exportPharmaciesCSV;
-      document.getElementById('btnExportRecs').onclick = exportRecsCSV;
-      document.getElementById('btnExportGeo').onclick = exportGeoJSON;
-      document.getElementById('btnImportGeo').onclick = () => document.getElementById('fileGeo').click();
-      document.getElementById('fileGeo').onchange = (e) => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = ()=>{ try { importGeoJSON(JSON.parse(r.result)); } catch(err){ alert('Invalid GeoJSON'); } }; r.readAsText(f); };
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', (e)=>{
+    if (e.type==='polygon'){ aoiPolys.push(e.overlay); }
+    else if (e.type==='rectangle'){
+      const b=e.overlay.getBounds();
+      const poly=new google.maps.Polygon({ map, paths:[
+        {lat:b.getSouthWest().lat(), lng:b.getSouthWest().lng()},
+        {lat:b.getNorthEast().lat(), lng:b.getSouthWest().lng()},
+        {lat:b.getNorthEast().lat(), lng:b.getNorthEast().lng()},
+        {lat:b.getSouthWest().lat(), lng:b.getNorthEast().lng()}
+      ], fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 });
+      e.overlay.setMap(null); aoiPolys.push(poly);
+    }
+    computeZones(); updateStats(); saveState();
+    const poly=aoiPolys[aoiPolys.length-1];
+    poly.addListener('rightclick', ()=>{ poly.setMap(null); const i=aoiPolys.indexOf(poly); if(i>-1) aoiPolys.splice(i,1); computeZones(); updateStats(); saveState(); });
+  });
 
-      document.getElementById('btnEn').onclick = () => setLang('en');
-      document.getElementById('btnFr').onclick = () => setLang('fr');
-      setLang('en');
+  map.addListener('click', (e)=>addPharmacy(e.latLng.lat(), e.latLng.lng()));
 
-      // Dist label fixed at 300m (law); keeping UI label for clarity
-      document.getElementById('distLabel').textContent = '300m';
-    };
+  setLangUI(langSel.value);
+
+  const raw=localStorage.getItem('pharma300'); if(raw){ try{ loadProject(JSON.parse(raw)); }catch{} }
+}
+window.initMap = initMap; // expose for callback
   </script>
-  <!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your actual key. Ensure the Places & Drawing libraries are enabled. -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-hpFz31_2_VFsrX9bC_dT_ldM3xaoxoA&callback=initMap&libraries=places,drawing"></script>
+
+  <!-- Load Google Maps (use a VALID key; enable Maps JavaScript API + Drawing) -->
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-hpFz31_2_VFsrX9bC_dT_ldM3xaoxoA&libraries=places,drawing&callback=initMap">
+</script>
 </body>
 </html>
