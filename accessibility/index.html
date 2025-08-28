@@ -169,6 +169,30 @@ let tangierCirclesLayer = null; // google.maps.Data
 let tangierBounds = null;
 
 /* ---------- Helpers ---------- */
+/* ---------- Stats UI ---------- */
+function updateStats(){
+  const el = document.getElementById('stats');
+  if (!el) return;
+
+  // base stats
+  let txt = `${pharmacies.length} ${pharmacies.length === 1 ? 'pharmacy' : 'pharmacies'} • ${aoiPolys.length} ${aoiPolys.length === 1 ? 'area' : 'areas'}`;
+
+  // try to add allowed-area size if available
+  if (allowedData) {
+    try {
+      allowedData.toGeoJson(gj => {
+        try {
+          const m2 = turf.area(gj);                   // square meters
+          const ha = m2 / 10000;                      // hectares
+          el.textContent = `${txt} • allowed ${ha.toFixed(1)} ha`;
+        } catch { el.textContent = txt; }
+      });
+      return; // we'll set text inside the callback
+    } catch { /* fall through */ }
+  }
+  el.textContent = txt;
+}
+
 function pharmaciesToFC(){
   return turf.featureCollection(pharmacies.map(p =>
     turf.point([p.marker.getPosition().lng(), p.marker.getPosition().lat()])
