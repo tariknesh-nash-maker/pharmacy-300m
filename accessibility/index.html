@@ -169,30 +169,6 @@ let tangierCirclesLayer = null; // google.maps.Data
 let tangierBounds = null;
 
 /* ---------- Helpers ---------- */
-/* ---------- Stats UI ---------- */
-function updateStats(){
-  const el = document.getElementById('stats');
-  if (!el) return;
-
-  // base stats
-  let txt = `${pharmacies.length} ${pharmacies.length === 1 ? 'pharmacy' : 'pharmacies'} • ${aoiPolys.length} ${aoiPolys.length === 1 ? 'area' : 'areas'}`;
-
-  // try to add allowed-area size if available
-  if (allowedData) {
-    try {
-      allowedData.toGeoJson(gj => {
-        try {
-          const m2 = turf.area(gj);                   // square meters
-          const ha = m2 / 10000;                      // hectares
-          el.textContent = `${txt} • allowed ${ha.toFixed(1)} ha`;
-        } catch { el.textContent = txt; }
-      });
-      return; // we'll set text inside the callback
-    } catch { /* fall through */ }
-  }
-  el.textContent = txt;
-}
-
 function pharmaciesToFC(){
   return turf.featureCollection(pharmacies.map(p =>
     turf.point([p.marker.getPosition().lng(), p.marker.getPosition().lat()])
@@ -463,33 +439,106 @@ function accessibilityScore(pt, strategyKey){
   return Math.round(score * 100) / 10; // 0..10 with 0.1 precision
 }
 
-document.getElementById('recommendBtn').addEventListener('click', async () => {
-  if (!aoiPolys.length || pharmacies.length === 0) { alert('Draw AOI and add pharmacies first.'); return; }
+document.getElementById('recommendBtn').addEventListener('click', () => {
+  try {
+    if (!aoiPolys.length || pharmacies.length === 0) {
+      alert('Draw AOI and add pharmacies first.');
+      return;
+    }
 
-  // 1) Make sure allowed area exists
-  let allowedGJ=null; await new Promise(res => allowedData.toGeoJson(gj=>{ allowedGJ=gj; res(); }));
-  if(!allowedGJ){ alert('No allowed area.'); return; }
+    // Get the current allowed polygons (async)
+    allowedData.toGeoJson((allowedGJ) => {
+      try {
+        if (!allowedGJ || !allowedGJ.features || allowedGJ.features.length === 0) {
+          alert('No allowed area. Your AOI may be fully covered by 300 m buffers.');
+          clearRecs(); updateExportButtons();
+          return;
+        }
 
-  // 2) Prepare data & candidates (same as before)
-  const ph = pharmaciesToFC();
-  const grid = turf.pointGrid(turf.bbox(allowedGJ), GRID_SPACING_KM, {units:'kilometers'});
-  const polys = collectPolygons(allowedGJ);
-  const candidates = grid.features.filter(pt => polys.some(pg => turf.booleanPointInPolygon(pt, pg)));
-  const K = Math.min(3, ph.features.length);
+        const ph = pharmaciesToFC();
+        const bbox = turf.bbox(allowedGJ); // safe now
+        const grid = turf.pointGrid(bbox, GRID_SPACING_KM, { units: 'kilometers' });
 
-  // 3) Filter by 300m
-  let prelim = candidates.map(pt => ({ pt, dMin: nearestDistM(pt, ph), avgK: avgKNearestM(pt, ph, K) }))
-                         .filter(r => r.dMin >= LEGAL_BUFFER_M);
-  if(!prelim.length){ alert('No legal candidate points found. Try enlarging the AOI.'); clearRecs(); updateExportButtons(); return; }
+        const polys = collectPolygons(allowedGJ);
+        if (!polys.length) {
+          alert('No allowed area polygons found. Try changing your AOI or pharmacy points.');
+          clearRecs(); updateExportButtons();
+          return;
+        }
 
-  // 4) One-time POI sweep for the AOI (cached per run)
-  await loadPOIsForAOI();
+        const candidates = grid.features.filter((pt) =>
+          polys.some((pg) => turf.booleanPointInPolygon(pt, pg))
+        );
 
-  // 5) Accessibility score per candidate
-  const strategyKey = (document.getElementById('accessStrategy')||{}).value || 'balanced';
-  for (const r of prelim){
-    r.access = accessibilityScore(r.pt, strategyKey); // 0..10
+        const K = Math.min(3, ph.features.length);
+        let scored = candidates.map((pt) => ({
+          pt,
+          dMin: nearestDistM(pt, ph),
+          avgK: avgKNearestM(pt, ph, K)
+        })).filter((r) => r.dMin >= LEGAL_BUFFER_M);
+
+        if (!scored.length) {
+          alert('No legal candidate points found. Try enlarging the AOI.');
+          clearRecs(); updateExportButtons();
+          return;
+        }
+
+        // Rank: closer to clusters first (demand proxy), then larger legal headroom
+        scored.sort((a, b) => (a.avgK - b.avgK) || (a.dMin - b.dMin));
+
+        // Pick up to 8 with spacing
+        const picked = [];
+        for (const r of scored) {
+          let ok = true;
+          for (const p of picked) {
+            const dm = turf.distance(r.pt, p.pt, { units: 'kilometers' }) * 1000;
+            if (dm < MIN_REC_SEP_M) { ok = false; break; }
+          }
+          if (ok) picked.push(r);
+          if (picked.length === 8) break;
+        }
+
+        clearRecs();
+        picked.forEach((r, i) => {
+          const [lng, lat] = r.pt.geometry.coordinates;
+          const m = new google.maps.Marker({
+            map,
+            position: { lat, lng },
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 7, fillColor: '#f59e0b', fillOpacity: 1,
+              strokeColor: '#b45309', strokeWeight: 2
+            },
+            title: `Recommendation #${i + 1}`
+          });
+          const lbl = new google.maps.Marker({
+            map,
+            position: { lat, lng },
+            icon: { url: `data:image/svg+xml;utf8,${encodeURIComponent(labelSVG(i + 1))}` },
+            clickable: false
+          });
+          m._label = lbl; recsMarkers.push(m);
+
+          const info = new google.maps.InfoWindow({
+            content: `<div><b>Recommendation #${i + 1}</b><br>
+                      Nearest pharmacy: ${r.dMin.toFixed(0)} m<br>
+                      Avg distance to ${Math.min(3, pharmacies.length)} nearest: ${r.avgK.toFixed(0)} m</div>`
+          });
+          m.addListener('click', () => info.open({ map, anchor: m }));
+        });
+
+        lastRecs = picked;
+        updateStats(); updateExportButtons(); saveState();
+      } catch (err) {
+        console.error(err);
+        alert('Failed to compute recommendations: ' + (err?.message || err));
+      }
+    });
+  } catch (outerErr) {
+    console.error(outerErr);
+    alert('Unexpected error: ' + (outerErr?.message || outerErr));
   }
+});
 
   // 6) Composite ranking: prioritize Accessibility, then avgK (demand sign), then legal distance buffer
   prelim.sort((a,b) =>
@@ -670,6 +719,8 @@ function initMap(){
     computeZones(); updateStats(); saveState();
     const poly=aoiPolys[aoiPolys.length-1];
     poly.addListener('rightclick', ()=>{ poly.setMap(null); const i=aoiPolys.indexOf(poly); if(i>-1) aoiPolys.splice(i,1); computeZones(); updateStats(); saveState(); });
+    drawingManager.setDrawingMode(null);
+
   });
 
   map.addListener('click', (e)=>addPharmacy(e.latLng.lat(), e.latLng.lng()));
