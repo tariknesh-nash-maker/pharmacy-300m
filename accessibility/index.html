@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pharmacy 300m — AI for Open Governance (Google Maps)</title>
+  <style>
+    :root { --panelW: 380px; }
+    html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; color: #0f172a; }
+    #map { position: absolute; inset: 56px 0 0 var(--panelW); }
+    header { position: absolute; top: 0; left: 0; right: 0; height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 14px; background: #0f172a; color: white; z-index: 1000; box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+    header .brand { font-weight: 700; letter-spacing: .2px; }
+    .panel { position: absolute; top: 56px; left: 0; bottom: 0; width: var(--panelW); padding: 16px; overflow-y: auto; background: #fff; border-right: 1px solid #e5e7eb; z-index: 900; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+    .step { margin-bottom: 18px; padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb; }
+    .step b { color: #0f172a; }
+    .legend { position: absolute; right: 10px; bottom: 10px; background: rgba(255,255,255,0.95); padding: 8px 10px; border-radius: 8px; border: 1px solid #e5e7eb; font-size: 12px; z-index: 500; }
+    .legend div { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #9ca3af; }
+    .footer { font-size: 12px; color: #475569; margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 10px; }
+    .langSel { margin-left: auto; }
+    .secondary { background:#fff; border:1px solid #cbd5e1; padding:6px 10px; border-radius:8px; cursor:pointer; }
+    button { cursor:pointer; }
+    .muted { color:#64748b; font-size:12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Pharmacy 300m Rule</div>
+    <select id="langSel" class="langSel">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+    </select>
+  </header>
+
+  <div class="panel">
+    <h2 id="stepsTitle">4 Steps to Use</h2>
+    <div class="step"><b id="s1">1. Identify a neighborhood</b><br><span id="s1txt">Draw your area of interest on the map.</span></div>
+    <div class="step"><b id="s2">2. Add existing pharmacies</b><br><span id="s2txt">Click on the map to add pharmacies. Drag to move. Right-click to remove.</span></div>
+    <div class="step"><b id="s3">3. Find recommendations</b><br>
+      <div class="step"><b>Accessibility strategy</b><br>
+        <select id="accessStrategy">
+          <option value="balanced">Balanced</option>
+          <option value="public">Public health</option>
+          <option value="business">Business</option>
+      </select>
+      <div class="muted" style="margin-top:6px">Used to weight bus/clinics/schools/markets/parking</div>
+    </div>
+      <button id="recommendBtn">Find spots</button>
+      <button id="exportAllowedBtn" class="secondary" disabled>Export Allowed</button>
+      <button id="exportRecsBtn" class="secondary" disabled>Export Recs</button>
+    </div>
+    <div class="step"><b id="s4">4. Save for the future</b><br>
+      <button id="saveBtn" class="secondary">Save</button>
+      <button id="loadBtn" class="secondary">Load</button>
+      <button id="exportBtn" class="secondary" disabled>Export Project</button>
+      <input id="importFile" type="file" accept=".json,.geojson,application/json"/>
+    </div>
+
+    <div id="stats">0 pharmacies • 0 areas</div>
+
+    <!-- New: Community Layer for Tangier -->
+    <div class="step">
+      <b id="layerTitle">Community layer: Tangier pharmacies</b><br>
+      <label><input type="checkbox" id="toggleTangier"> <span id="layerToggleText">Show Tangier pharmacies + 300m circles</span></label>
+      <div id="tangierCount" class="muted" style="margin-top:6px;"></div>
+      <button id="fitTangierBtn" class="secondary" style="margin-top:8px; display:none;">Zoom to Tangier</button>
+    </div>
+
+    <div class="footer" id="footerText">
+      <div id="whyTextEn">
+        <p><b>Why this exists:</b> Many laws live in PDFs. This prototype shows how AI + maps can make a rule tangible for citizens and entrepreneurs. Today: the 300 m pharmacy rule. Tomorrow: budgets, access to information, public services.</p>
+        <p><b>Why Open Data Matters:</b> This tool is only possible if the locations of pharmacies are openly available. Open data lets citizens and entrepreneurs verify compliance, helps regulators enforce rules fairly, and enables innovators to build services that make governance tangible.</p>
+        <p><b>Legal context (Morocco):</b> According to Law n°17-04 (Code du médicament et de la pharmacie), Article 57, two pharmacies cannot be opened within 300 meters of each other, except by special authorization from the Ministry of Health. This rule is enforced by regional health authorities.</p>
+        <p><b>Who can benefit:</b> Aspiring pharmacists, existing pharmacists, health authorities, civil society, and the open governance community.</p>
+        <p>Contact us: <a href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>
+      </div>
+      <div id="whyTextFr" style="display:none">
+        <p><b>Pourquoi ce projet :</b> Beaucoup de lois restent enfermées dans des PDF. Ce prototype montre comment l’IA + la cartographie peuvent rendre une règle tangible pour les citoyens et les entrepreneurs. Aujourd’hui : la règle des 300 m entre pharmacies. Demain : budgets, accès à l’information, services publics.</p>
+        <p><b>Pourquoi les données ouvertes comptent :</b> Cet outil n’est possible que si la localisation des pharmacies est accessible. Les données ouvertes permettent aux citoyens et entrepreneurs de vérifier la conformité, aident les autorités sanitaires à appliquer la règle équitablement, et permettent aux innovateurs de créer des services qui rendent la gouvernance concrète.</p>
+        <p><b>Contexte légal (Maroc) :</b> Selon la loi n°17-04 (Code du médicament et de la pharmacie), article 57, deux pharmacies ne peuvent pas être ouvertes à moins de 300 mètres l’une de l’autre, sauf autorisation spéciale du Ministère de la Santé. Cette règle est appliquée par les autorités sanitaires régionales.</p>
+        <p><b>Pour qui ?</b> Porteurs de projet, pharmaciens existants, autorités sanitaires, société civile et la communauté open gov.</p>
+        <p>Contactez-nous : <a href="mailto:neshnash@hotmail.com">neshnash@hotmail.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+  <div class="legend">
+    <div><span class="swatch" style="background:#ef4444"></span> 300 m exclusion</div>
+    <div><span class="swatch" style="background:#10b981"></span> Allowed area</div>
+    <div><span class="swatch" style="background:#3b82f6"></span> Pharmacies</div>
+    <div><span class="swatch" style="background:#f59e0b"></span> Recommendations</div>
+  </div>
+
+  <!-- Turf -->
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+
+  <script>
+/* ---------- DOM refs FIRST ---------- */
+const stepsTitle = document.getElementById('stepsTitle');
+const s1 = document.getElementById('s1');
+const s1txt = document.getElementById('s1txt');
+const s2 = document.getElementById('s2');
+const s2txt = document.getElementById('s2txt');
+const s3 = document.getElementById('s3');
+const s4 = document.getElementById('s4');
+const recommendBtn = document.getElementById('recommendBtn');
+const saveBtn = document.getElementById('saveBtn');
+const loadBtn = document.getElementById('loadBtn');
+const exportBtn = document.getElementById('exportBtn');
+const exportRecsBtn = document.getElementById('exportRecsBtn');
+const exportAllowedBtn = document.getElementById('exportAllowedBtn');
+const langSel = document.getElementById('langSel');
+const whyTextEn = document.getElementById('whyTextEn');
+const whyTextFr = document.getElementById('whyTextFr');
+
+// Tangier UI
+const layerTitle = document.getElementById('layerTitle');
+const layerToggleText = document.getElementById('layerToggleText');
+const toggleTangier = document.getElementById('toggleTangier');
+const tangierCount = document.getElementById('tangierCount');
+const fitTangierBtn = document.getElementById('fitTangierBtn');
+
+/* ---------- i18n ---------- */
+const STRINGS = {
+  en: { stepsTitle:"4 Steps to Use", s1:"1. Identify a neighborhood", s1txt:"Draw your area of interest on the map.",
+        s2:"2. Add existing pharmacies", s2txt:"Click on the map to add pharmacies. Drag to move. Right-click to remove.",
+        s3:"3. Find recommendations", s4:"4. Save for the future",
+        findBtn:"Find spots", save:"Save", load:"Load", export:"Export Project", exportRecs:"Export Recs", exportAllowed:"Export Allowed",
+        layerTitle:"Community layer: Tangier pharmacies", layerToggle:"Show Tangier pharmacies + 300m circles", zoomTangier:"Zoom to Tangier" },
+  fr: { stepsTitle:"4 étapes d'utilisation", s1:"1. Identifier un quartier", s1txt:"Dessinez votre zone d’intérêt sur la carte.",
+        s2:"2. Ajouter les pharmacies existantes", s2txt:"Cliquez sur la carte pour ajouter une pharmacie. Déplacez pour modifier. Clic droit pour supprimer.",
+        s3:"3. Trouver des recommandations", s4:"4. Sauvegarder pour plus tard",
+        findBtn:"Trouver des emplacements", save:"Sauvegarder", load:"Charger", export:"Exporter le projet", exportRecs:"Exporter Recos", exportAllowed:"Exporter zones autorisées",
+        layerTitle:"Couche communauté : Pharmacies de Tanger", layerToggle:"Afficher les pharmacies de Tanger + cercles de 300 m", zoomTangier:"Zoom sur Tanger" }
+};
+function setLangUI(lang){
+  const S = STRINGS[lang] || STRINGS.en;
+  stepsTitle.textContent = S.stepsTitle;
+  s1.textContent = S.s1; s1txt.textContent = S.s1txt;
+  s2.textContent = S.s2; s2txt.textContent = S.s2txt;
+  s3.textContent = S.s3; s4.textContent = S.s4;
+  recommendBtn.textContent = S.findBtn;
+  saveBtn.textContent = S.save; loadBtn.textContent = S.load; exportBtn.textContent = S.export;
+  exportRecsBtn.textContent = S.exportRecs; exportAllowedBtn.textContent = S.exportAllowed;
+  layerTitle.textContent = S.layerTitle; layerToggleText.textContent = S.layerToggle; fitTangierBtn.textContent = S.zoomTangier;
+  whyTextEn.style.display = (lang === 'en') ? 'block' : 'none';
+  whyTextFr.style.display = (lang === 'fr') ? 'block' : 'none';
+}
+langSel.addEventListener('change', e => setLangUI(e.target.value));
+setLangUI('en');
+
+/* ---------- Globals ---------- */
+let map, drawingManager;
+let circlesData, allowedData;            // created inside initMap()
+const pharmacies = [];                   // [{marker, lat, lng}]
+const aoiPolys = [];                     // [google.maps.Polygon]
+const recsMarkers = [];                  // markers for recommendations
+const LEGAL_BUFFER_M = 300;
+const GRID_SPACING_KM = 0.05;            // 50m
+const MIN_REC_SEP_M = 250;
+
+// Tangier dataset globals
+let tangierLoaded = false;
+let tangierVisible = false;
+let tangierMarkers = [];
+let tangierCirclesLayer = null; // google.maps.Data
+let tangierBounds = null;
+
+/* ---------- Helpers ---------- */
+function pharmaciesToFC(){
+  return turf.featureCollection(pharmacies.map(p =>
+    turf.point([p.marker.getPosition().lng(), p.marker.getPosition().lat()])
+  ));
+}
+function aoiToFC(){
+  const feats = aoiPolys.map(poly => {
+    const path = poly.getPath().getArray().map(pt => [pt.lng(), pt.lat()]);
+    if (path.length && (path[0][0] !== path[path.length-1][0] || path[0][1] !== path[path.length-1][1])) {
+      path.push(path[0]);
+    }
+    return turf.polygon([path]);
+  });
+  return turf.featureCollection(feats);
+}
+function renderGeoJSON(dataLayer, geojson){
+  dataLayer.forEach(f => dataLayer.remove(f));
+  if (!geojson) return;
+  if (geojson.type === 'FeatureCollection') geojson.features.forEach(f => dataLayer.addGeoJson(f));
+  else dataLayer.addGeoJson(geojson);
+}
+function tryUnionJitter(a, b){
+  try { return turf.union(a, b); }
+  catch(e){
+    try { return turf.union(turf.buffer(a,1e-4,{units:'kilometers'}), turf.buffer(b,1e-4,{units:'kilometers'})); }
+    catch{ return a; }
+  }
+}
+function computeZones(){
+  if (!circlesData || !allowedData) return; // not ready until initMap runs
+  renderGeoJSON(circlesData, null);
+  renderGeoJSON(allowedData, null);
+
+  const phFC = pharmaciesToFC();
+  const circles = phFC.features.map(f => turf.circle(f.geometry.coordinates, LEGAL_BUFFER_M/1000, { units:'kilometers' }));
+  const circlesFC = turf.featureCollection(circles);
+  renderGeoJSON(circlesData, circlesFC);
+
+  if (!aoiPolys.length) { updateExportButtons(); return; }
+
+  const aoiFC = aoiToFC();
+  let aoiUnion = aoiFC.features[0];
+  for (let i=1; i<aoiFC.features.length; i++) aoiUnion = tryUnionJitter(aoiUnion, aoiFC.features[i]);
+
+  let forbidden = circlesFC.features[0] || null;
+  for (let i=1; i<circlesFC.features.length; i++) forbidden = forbidden ? tryUnionJitter(forbidden, circlesFC.features[i]) : circlesFC.features[i];
+
+  let allowed = aoiUnion;
+  if (forbidden) {
+    try { allowed = turf.difference(aoiUnion, forbidden); }
+    catch{ for (const f of circlesFC.features) { try { const d = turf.difference(allowed, f); if (d) allowed = d; } catch{} } }
+  }
+  if (allowed) renderGeoJSON(allowedData, allowed);
+  updateExportButtons();
+}
+function addPharmacy(lat, lng){
+  const marker = new google.maps.Marker({
+    map, position:{lat, lng}, draggable:true,
+    icon:{ path: google.maps.SymbolPath.CIRCLE, scale:6, fillColor:'#3b82f6', fillOpacity:1, strokeColor:'#1e40af', strokeWeight:1 }
+  });
+  marker.addListener('rightclick', () => {
+    marker.setMap(null);
+    const i = pharmacies.findIndex(p => p.marker === marker);
+    if (i > -1) pharmacies.splice(i,1);
+    computeZones(); updateStats(); saveState();
+  });
+  marker.addListener('dragend', () => { computeZones(); updateStats(); saveState(); });
+  pharmacies.push({ marker, lat, lng });
+  computeZones(); updateStats(); saveState();
+}
+
+/* ---------- Tangier dataset layer ---------- */
+async function loadTangierJSON(){
+  const res = await fetch('pharmacies_tanger.json'); // place this JSON next to the HTML file
+  if (!res.ok) throw new Error('HTTP '+res.status);
+  return res.json();
+}
+function setTangierVisibility(show){
+  tangierMarkers.forEach(m => m.setMap(show ? map : null));
+  if (tangierCirclesLayer) tangierCirclesLayer.setMap(show ? map : null);
+  tangierVisible = show;
+}
+function buildTangierLayer(list){
+  tangierBounds = new google.maps.LatLngBounds();
+
+  // markers
+  tangierMarkers = list.map((d) => {
+    const pos = { lat: Number(d.lat), lng: Number(d.lng) };
+    const m = new google.maps.Marker({
+      position: pos,
+      map: null, // we'll toggle on visibility
+      icon:{ path: google.maps.SymbolPath.CIRCLE, scale:5, fillColor:'#3b82f6', fillOpacity:1, strokeColor:'#1e40af', strokeWeight:1 },
+      title: d.name || 'Pharmacy'
+    });
+    const info = new google.maps.InfoWindow({ content: `<div><b>${(d.name||'Pharmacy').replace(/</g,'&lt;')}</b><br>${pos.lat.toFixed(6)}, ${pos.lng.toFixed(6)}</div>` });
+    m.addListener('click', ()=> info.open({map, anchor:m}));
+    tangierBounds.extend(pos);
+    return m;
+  });
+
+  // 300m circles as a GeoJSON Data layer
+  const circles = list.map(d => turf.circle([Number(d.lng), Number(d.lat)], LEGAL_BUFFER_M/1000, { units:'kilometers' }));
+  const circlesFC = turf.featureCollection(circles);
+  tangierCirclesLayer = new google.maps.Data({ map: null });
+  tangierCirclesLayer.setStyle({ fillOpacity:0.18, strokeColor:'#ef4444', fillColor:'#ef4444', strokeWeight:1 });
+  // add GeoJSON
+  if (circlesFC.type === 'FeatureCollection') circlesFC.features.forEach(f => tangierCirclesLayer.addGeoJson(f));
+
+  tangierCount.textContent = `${list.length} pharmacies in dataset`;
+  fitTangierBtn.style.display = 'inline-block';
+}
+
+toggleTangier.addEventListener('change', async (e)=>{
+  if (e.target.checked){
+    if (!tangierLoaded){
+      try {
+        const list = await loadTangierJSON();
+        buildTangierLayer(list);
+        tangierLoaded = true;
+      } catch(err){
+        alert('Failed to load Tangier dataset: '+ err.message);
+        e.target.checked = false; return;
+      }
+    }
+    setTangierVisibility(true);
+  } else {
+    setTangierVisibility(false);
+  }
+});
+
+fitTangierBtn.addEventListener('click', ()=>{
+  if (tangierBounds) map.fitBounds(tangierBounds);
+});
+
+/* ---------- Recommendations ---------- */
+let lastRecs = [];
+function clearRecs(){ recsMarkers.forEach(m => { m.setMap(null); if (m._label) m._label.setMap(null); }); recsMarkers.length = 0; }
+function labelSVG(n){
+  return `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='22'><rect rx='6' ry='6' width='40' height='22' fill='%23f59e0b'/><text x='20' y='15' font-size='12' font-family='system-ui, sans-serif' text-anchor='middle' fill='white' font-weight='700'>#${n}</text></svg>`;
+}
+function nearestDistM(pt, pointsFC){ let best=Infinity; pointsFC.features.forEach(p=>{ const d=turf.distance(pt,p,{units:'kilometers'})*1000; if(d<best) best=d; }); return best; }
+function avgKNearestM(pt, pointsFC, k){ const ds=pointsFC.features.map(p=>turf.distance(pt,p,{units:'kilometers'})*1000).sort((a,b)=>a-b); const kk=Math.min(k,ds.length); let s=0; for(let i=0;i<kk;i++) s+=ds[i]; return s/kk; }
+function collectPolygons(gj){
+  const out=[]; const pushPoly=coords=>out.push(turf.polygon(coords)); if(!gj) return out;
+  if(gj.type==='FeatureCollection'){ gj.features.forEach(f=>{ const g=f.geometry; if(!g) return; if(g.type==='Polygon') pushPoly(g.coordinates); if(g.type==='MultiPolygon') g.coordinates.forEach(pushPoly); }); }
+  else if(gj.type==='Feature'){ const g=gj.geometry; if(g?.type==='Polygon') pushPoly(g.coordinates); if(g?.type==='MultiPolygon') g.coordinates.forEach(pushPoly); }
+  else if(gj.type==='Polygon'||gj.type==='MultiPolygon'){ return collectPolygons({type:'Feature',geometry:gj}); }
+  return out;
+}
+/* ---------- Accessibility / POIs ---------- */
+const POI_TYPES = {
+  bus: ['bus_station', 'transit_station'],
+  taxi: ['taxi_stand'],
+  clinic: ['hospital', 'doctor', 'pharmacy'],      // clinics/hospitals; include 'pharmacy' only as demand proxy, not as legal blocker
+  school: ['school', 'university'],
+  market: ['supermarket', 'grocery_or_supermarket', 'shopping_mall', 'market'],
+  parking: ['parking']
+};
+
+// Strategy weights (sum to 1 across categories)
+const STRATEGIES = {
+  balanced: { bus:0.18, taxi:0.07, clinic:0.30, school:0.20, market:0.15, parking:0.10 },
+  public:   { bus:0.22, taxi:0.08, clinic:0.35, school:0.20, market:0.10, parking:0.05 },
+  business: { bus:0.14, taxi:0.10, clinic:0.25, school:0.18, market:0.23, parking:0.10 }
+};
+
+let placesService = null;
+const poiCache = { bus:[], taxi:[], clinic:[], school:[], market:[], parking:[] };
+const poiIdSet = new Set();
+
+// Helper: dedupe & store a found place
+function _pushPOI(kind, place){
+  if (!place || !place.place_id || !place.geometry?.location) return;
+  if (poiIdSet.has(place.place_id)) return;
+  poiIdSet.add(place.place_id);
+  const ll = place.geometry.location;
+  poiCache[kind].push({ id: place.place_id, lat: ll.lat(), lng: ll.lng() });
+}
+
+// Sweep AOI with a light grid and Nearby Search; page through results
+async function loadPOIsForAOI(){
+  // Clear previous
+  Object.keys(poiCache).forEach(k => poiCache[k] = []);
+  poiIdSet.clear();
+  if (!placesService) placesService = new google.maps.places.PlacesService(map);
+
+  // Build a grid of query points over AOI bounds (about 600–800m spacing to limit calls)
+  let allowedGJ=null; await new Promise(res => allowedData.toGeoJson(gj => {allowedGJ=gj; res();}));
+  if (!allowedGJ) return;
+
+  const bbox = turf.bbox(allowedGJ);
+  const GRID_KM = 0.7;
+  const seeds = turf.pointGrid(bbox, GRID_KM, {units:'kilometers'}).features
+    .map(f => ({lng:f.geometry.coordinates[0], lat:f.geometry.coordinates[1]}))
+    .filter(pt => {
+      // keep only seeds inside allowed polygons to reduce noise
+      const polys = collectPolygons(allowedGJ);
+      return polys.some(pg => turf.booleanPointInPolygon(turf.point([pt.lng, pt.lat]), pg));
+    });
+
+  async function nearbyAt(kind, loc){
+    // 1500 m radius keeps calls moderate but useful; adjust if needed
+    const request = { location: new google.maps.LatLng(loc.lat, loc.lng), radius: 1500, type: POI_TYPES[kind] };
+    return new Promise(resolve => {
+      placesService.nearbySearch(request, function page(results, status, pagination){
+        if (status === google.maps.places.PlacesServiceStatus.OK && Array.isArray(results)){
+          results.forEach(r => _pushPOI(kind, r));
+          if (pagination && pagination.hasNextPage){
+            setTimeout(() => pagination.nextPage(), 200); // respect throttle
+          } else resolve();
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  // For each seed, pull a few categories (choose order by expected density)
+  for (const seed of seeds){
+    await nearbyAt('clinic', seed);
+    await nearbyAt('bus', seed);
+    await nearbyAt('school', seed);
+    await nearbyAt('market', seed);
+    await nearbyAt('taxi', seed);
+    await nearbyAt('parking', seed);
+  }
+}
+
+// Nearest distance (meters) from turf pt -> array of {lat,lng}
+function nearestMArray(pt, arr){
+  if (!arr.length) return Infinity;
+  let best = Infinity;
+  const [lng,lat] = pt.geometry.coordinates;
+  for (const a of arr){
+    const d = turf.distance([lng,lat], [a.lng,a.lat], {units:'kilometers'}) * 1000;
+    if (d < best) best = d;
+  }
+  return best;
+}
+
+// Convert distances to a 0..1 score with soft caps (closer is better)
+function scoreFromDistance(m){
+  if (!isFinite(m)) return 0;
+  if (m <= 100) return 1;
+  if (m >= 800) return 0;
+  // linear between 100m and 800m
+  return 1 - (m - 100) / (800 - 100);
+}
+
+// Accessibility score 0..10 for a candidate turf point
+function accessibilityScore(pt, strategyKey){
+  const S = STRATEGIES[strategyKey] || STRATEGIES.balanced;
+  const dBus    = nearestMArray(pt, poiCache.bus);
+  const dTaxi   = nearestMArray(pt, poiCache.taxi);
+  const dClinic = nearestMArray(pt, poiCache.clinic);
+  const dSchool = nearestMArray(pt, poiCache.school);
+  const dMarket = nearestMArray(pt, poiCache.market);
+  const dPark   = nearestMArray(pt, poiCache.parking);
+
+  const score =
+      scoreFromDistance(dBus)    * S.bus +
+      scoreFromDistance(dTaxi)   * S.taxi +
+      scoreFromDistance(dClinic) * S.clinic +
+      scoreFromDistance(dSchool) * S.school +
+      scoreFromDistance(dMarket) * S.market +
+      scoreFromDistance(dPark)   * S.parking;
+
+  return Math.round(score * 100) / 10; // 0..10 with 0.1 precision
+}
+
+document.getElementById('recommendBtn').addEventListener('click', async () => {
+  if (!aoiPolys.length || pharmacies.length === 0) { alert('Draw AOI and add pharmacies first.'); return; }
+
+  // 1) Make sure allowed area exists
+  let allowedGJ=null; await new Promise(res => allowedData.toGeoJson(gj=>{ allowedGJ=gj; res(); }));
+  if(!allowedGJ){ alert('No allowed area.'); return; }
+
+  // 2) Prepare data & candidates (same as before)
+  const ph = pharmaciesToFC();
+  const grid = turf.pointGrid(turf.bbox(allowedGJ), GRID_SPACING_KM, {units:'kilometers'});
+  const polys = collectPolygons(allowedGJ);
+  const candidates = grid.features.filter(pt => polys.some(pg => turf.booleanPointInPolygon(pt, pg)));
+  const K = Math.min(3, ph.features.length);
+
+  // 3) Filter by 300m
+  let prelim = candidates.map(pt => ({ pt, dMin: nearestDistM(pt, ph), avgK: avgKNearestM(pt, ph, K) }))
+                         .filter(r => r.dMin >= LEGAL_BUFFER_M);
+  if(!prelim.length){ alert('No legal candidate points found. Try enlarging the AOI.'); clearRecs(); updateExportButtons(); return; }
+
+  // 4) One-time POI sweep for the AOI (cached per run)
+  await loadPOIsForAOI();
+
+  // 5) Accessibility score per candidate
+  const strategyKey = (document.getElementById('accessStrategy')||{}).value || 'balanced';
+  for (const r of prelim){
+    r.access = accessibilityScore(r.pt, strategyKey); // 0..10
+  }
+
+  // 6) Composite ranking: prioritize Accessibility, then avgK (demand sign), then legal distance buffer
+  prelim.sort((a,b) =>
+    (b.access - a.access) ||           // higher accessibility first
+    (a.avgK - b.avgK)   ||             // then closer to cluster (demand proxy)
+    (a.dMin - b.dMin)                   // then larger legal headroom
+  );
+
+  // 7) Pick top N with min separation as before
+  const picked = [];
+  for (const r of prelim){
+    let ok = true;
+    for (const p of picked){
+      const dm = turf.distance(r.pt, p.pt, {units:'kilometers'})*1000;
+      if (dm < MIN_REC_SEP_M){ ok=false; break; }
+    }
+    if (ok) picked.push(r);
+    if (picked.length === 8) break;
+  }
+
+  // 8) Render
+  clearRecs();
+  picked.forEach((r,i)=>{ const [lng,lat] = r.pt.geometry.coordinates;
+    const m=new google.maps.Marker({ map, position:{lat,lng},
+      icon:{ path:google.maps.SymbolPath.CIRCLE, scale:7, fillColor:'#f59e0b', fillOpacity:1, strokeColor:'#b45309', strokeWeight:2 },
+      title:`Recommendation #${i+1}` });
+    const lbl=new google.maps.Marker({ map, position:{lat,lng},
+      icon:{ url:`data:image/svg+xml;utf8,${encodeURIComponent(labelSVG(i+1))}` }, clickable:false });
+    m._label=lbl; recsMarkers.push(m);
+
+    const html = `
+      <div>
+        <b>Recommendation #${i+1}</b><br>
+        Accessibility: <b>${r.access.toFixed(1)}/10</b><br>
+        Nearest pharmacy: ${r.dMin.toFixed(0)} m<br>
+        Avg distance to ${Math.min(3,pharmacies.length)} nearest: ${r.avgK.toFixed(0)} m
+      </div>`;
+    const info = new google.maps.InfoWindow({ content: html });
+    m.addListener('click', ()=>info.open({map, anchor:m}));
+  });
+
+  lastRecs = picked;
+  updateStats(); updateExportButtons(); saveState();
+});
+
+
+/* ---------- Export buttons ---------- */
+function updateExportButtons(){
+  if (!allowedData) { exportAllowedBtn.disabled = true; exportRecsBtn.disabled = (lastRecs.length===0); return; }
+  let hasAllowed=false; allowedData.forEach(()=>{ hasAllowed=true; });
+  exportAllowedBtn.disabled=!hasAllowed;
+  exportRecsBtn.disabled=(lastRecs.length===0);
+}
+exportAllowedBtn.addEventListener('click', () => {
+  if (!allowedData) return;
+  allowedData.toGeoJson(gj => {
+    const blob = new Blob([JSON.stringify(gj)], { type: 'application/geo+json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'allowed_areas.geojson'; a.click();
+    URL.revokeObjectURL(url);
+  });
+});
+exportRecsBtn.addEventListener('click', () => {
+  if (!lastRecs.length) return;
+  const fc = turf.featureCollection(lastRecs.map((r,i)=>turf.point(r.pt.geometry.coordinates,{rank:i+1, nearest_m:Number(r.dMin.toFixed(1)), avgK_m:Number(r.avgK.toFixed(1))})));
+  const blob = new Blob([JSON.stringify(fc)], { type: 'application/geo+json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'pharmacy_recommendations.geojson'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* ---------- Save / Load / Import / Export ---------- */
+function saveState(){
+  const state = {
+    pharmacies: pharmacies.map(p => ({ lat: p.marker.getPosition().lat(), lng: p.marker.getPosition().lng() })),
+    aoi: aoiToFC(),
+    lang: langSel.value,
+    recs: lastRecs.map(r => ({ lng: r.pt.geometry.coordinates[0], lat: r.pt.geometry.coordinates[1], dMin: r.dMin, avgK: r.avgK }))
+  };
+  localStorage.setItem('pharma300', JSON.stringify(state));
+  exportBtn.disabled = false;
+}
+function loadProject(state){
+  try{
+    pharmacies.splice(0).forEach(p=>p.marker.setMap(null));
+    aoiPolys.splice(0).forEach(p=>p.setMap(null));
+    if (circlesData && allowedData) { renderGeoJSON(circlesData,null); renderGeoJSON(allowedData,null); }
+    clearRecs();
+
+    if (state.lang) { langSel.value = state.lang; setLangUI(state.lang); }
+    (state.pharmacies||[]).forEach(p=>addPharmacy(p.lat,p.lng));
+    if (state.aoi){
+      (state.aoi.features||[]).forEach(f=>{
+        if (f.geometry?.type==='Polygon'){
+          const path=f.geometry.coordinates[0].map(([x,y])=>({lat:y,lng:x}));
+          const poly=new google.maps.Polygon({ map, paths:path, fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 });
+          poly.addListener('rightclick', ()=>{ poly.setMap(null); const i=aoiPolys.indexOf(poly); if(i>-1) aoiPolys.splice(i,1); computeZones(); updateStats(); saveState(); });
+          aoiPolys.push(poly);
+        }
+      });
+    }
+    computeZones();
+    lastRecs=[]; (state.recs||[]).forEach(r=>{ lastRecs.push({ pt:turf.point([r.lng,r.lat]), dMin:r.dMin||0, avgK:r.avgK||0 }); });
+    if (lastRecs.length){ clearRecs(); lastRecs.forEach((r,i)=>{ const [lng,lat]=r.pt.geometry.coordinates;
+      const m=new google.maps.Marker({ map, position:{lat,lng}, icon:{ path:google.maps.SymbolPath.CIRCLE, scale:7, fillColor:'#f59e0b', fillOpacity:1, strokeColor:'#b45309', strokeWeight:2 }, title:`Recommendation #${i+1}` });
+      const lbl=new google.maps.Marker({ map, position:{lat,lng}, icon:{ url:`data:image/svg+xml;utf8,${encodeURIComponent(labelSVG(i+1))}` }, clickable:false });
+      m._label=lbl; recsMarkers.push(m);
+    }); }
+    updateStats(); updateExportButtons();
+  }catch(e){ alert('Failed to load project: '+e.message); }
+}
+saveBtn.addEventListener('click', ()=>{ saveState(); alert('Project saved.'); });
+
+loadBtn.addEventListener('click', ()=>{
+  const raw = localStorage.getItem('pharma300');
+  if (!raw) return alert('No saved project.');
+  loadProject(JSON.parse(raw));
+});
+
+exportBtn.addEventListener('click', ()=>{
+  const raw = localStorage.getItem('pharma300') || '{}';
+  const blob = new Blob([raw], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'pharmacy_project.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importFile').addEventListener('change', async (e)=>{
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const txt = await f.text();
+    const state = JSON.parse(txt);
+    localStorage.setItem('pharma300', JSON.stringify(state));
+    loadProject(state);
+  } catch(err) {
+    alert('Import failed: ' + err.message);
+  }
+});
+
+/* ---------- initMap (GLOBAL) ---------- */
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 35.7595, lng: -5.8340 },
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    mapTypeControl: true,
+    mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR, position: google.maps.ControlPosition.TOP_RIGHT },
+    streetViewControl: false
+  });
+
+  // data layers (create AFTER API is loaded)
+  circlesData = new google.maps.Data({ map });
+  circlesData.setStyle({ fillOpacity:0.25, strokeColor:'#ef4444', fillColor:'#ef4444', strokeWeight:1 });
+  allowedData = new google.maps.Data({ map });
+  allowedData.setStyle({ fillOpacity:0.35, strokeColor:'#10b981', fillColor:'#10b981', strokeWeight:1 });
+
+  // drawing tools
+  drawingManager = new google.maps.drawing.DrawingManager({
+    drawingControl:true,
+    drawingControlOptions:{ position:google.maps.ControlPosition.TOP_LEFT, drawingModes:['polygon','rectangle'] },
+    polygonOptions:{ fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 },
+    rectangleOptions:{ fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 }
+  });
+  drawingManager.setMap(map);
+
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', (e)=>{
+    if (e.type==='polygon'){ aoiPolys.push(e.overlay); }
+    else if (e.type==='rectangle'){
+      const b=e.overlay.getBounds();
+      const poly=new google.maps.Polygon({ map, paths:[
+        {lat:b.getSouthWest().lat(), lng:b.getSouthWest().lng()},
+        {lat:b.getNorthEast().lat(), lng:b.getSouthWest().lng()},
+        {lat:b.getNorthEast().lat(), lng:b.getNorthEast().lng()},
+        {lat:b.getSouthWest().lat(), lng:b.getNorthEast().lng()}
+      ], fillColor:'#93c5fd', fillOpacity:0.12, strokeColor:'#3b82f6', strokeOpacity:0.9, strokeWeight:2 });
+      e.overlay.setMap(null); aoiPolys.push(poly);
+    }
+    computeZones(); updateStats(); saveState();
+    const poly=aoiPolys[aoiPolys.length-1];
+    poly.addListener('rightclick', ()=>{ poly.setMap(null); const i=aoiPolys.indexOf(poly); if(i>-1) aoiPolys.splice(i,1); computeZones(); updateStats(); saveState(); });
+  });
+
+  map.addListener('click', (e)=>addPharmacy(e.latLng.lat(), e.latLng.lng()));
+
+  // language & restore
+  setLangUI(langSel.value);
+  const raw = localStorage.getItem('pharma300');
+  if (raw) { try { loadProject(JSON.parse(raw)); } catch(e) {} }
+
+  // Turn on Tangier layer by default
+  toggleTangier.checked = true;
+  toggleTangier.dispatchEvent(new Event('change'));
+
+  // Optional perf: only show circles when zoomed in
+  map.addListener('zoom_changed', () => {
+    const z = map.getZoom();
+    if (tangierCirclesLayer) tangierCirclesLayer.setMap(z >= 14 ? map : null);
+  });
+}
+
+window.initMap = initMap; // expose for callback
+
+  </script>
+
+  <!-- Load Google Maps (use a VALID key; enable Maps JavaScript API + Drawing) -->
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-hpFz31_2_VFsrX9bC_dT_ldM3xaoxoA&libraries=places,drawing&callback=initMap">
+  </script>
+</body>
+</html>
