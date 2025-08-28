@@ -402,22 +402,12 @@ function loadProject(state){
   }catch(e){ alert('Failed to load project: '+e.message); }
 }
 saveBtn.addEventListener('click', ()=>{ saveState(); alert('Project saved.'); });
-loadBtn.addEventListener('click', ()=>{ const raw=localStorage.getItem('pharma300'); if(!raw) return alert('No saved project.'); loadProject(JSON.parse(raw)); });
-exportBtn.addEventListener('click', ()=>{ const raw=localStorage.getItem('pharma300')||'{}'; const blob=new Blob([raw],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='pharmacy_project.json'; a.click(); URL.revokeObjectURL(url); });
-document.getElementById('importFile').addEventListener('change', async (e)=>{ const f=e.target.files[0]; if(!f) return; try{ const txt=await f.text(); const state=JSON.parse(txt); localStorage.setItem('pharma300', JSON.stringify(state)); loadProject(state); } catch(err){ alert('Import failed: '+err.message); } });
-
-function updateStats(){ const recCount=lastRecs.length; const aoiCount=aoiPolys.length; document.getElementById('stats').textContent = `${pharmacies.length} pharmacies • ${aoiCount} AOIs • ${recCount} recs`; }
-
-/* ---------- initMap (GLOBAL) ---------- */
-function initMap(){
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 35.7595, lng: -5.8340 },
-    zoom: 14,
-    mapTypeId: google.maps.MapTypeId.SATELLITE,   // default satellite
-    mapTypeControl: true,
-    mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR, position: google.maps.ControlPosition.TOP_RIGHT },
-    streetViewControl: false
-  });
+loadBtn.addEventListener('click', ()=>{ $1  
+  // Turn on Tangier layer by default
+  toggleTangier.checked = true;
+  toggleTangier.dispatchEvent(new Event('change'));
+}
+);
 
   // data layers (create AFTER API is loaded)
   circlesData = new google.maps.Data({ map });
