@@ -445,8 +445,13 @@ loadBtn.addEventListener('click', ()=>{ $1
 
   setLangUI(langSel.value);
 
-  const raw=localStorage.getItem('pharma300'); if(raw){ try{ loadProject(JSON.parse(raw)); }catch{} }
-}
+  const raw = localStorage.getItem('pharma300');
+  if (raw) { try { loadProject(JSON.parse(raw)); } catch(e) {} }
+
+  // Turn on Tangier layer by default
+  toggleTangier.checked = true;
+  toggleTangier.dispatchEvent(new Event('change'));
+} // end initMap
 window.initMap = initMap; // expose for callback
   </script>
 
