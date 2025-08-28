@@ -1,0 +1,2622 @@
+[
+  {
+    "name": "Atlas",
+    "lat": 35.765038,
+    "lng": -5.8157925
+  },
+  {
+    "name": "Pharmacie Laaouini Ziaten",
+    "lat": 35.7444899,
+    "lng": -5.875398
+  },
+  {
+    "name": "Pharmacie Socco Alto",
+    "lat": 35.7814537,
+    "lng": -5.8409884
+  },
+  {
+    "name": "Pharmacie 911",
+    "lat": 35.7225533,
+    "lng": -5.7526568
+  },
+  {
+    "name": "Pharmacie LA PLAGE",
+    "lat": 35.7788093,
+    "lng": -5.8025336
+  },
+  {
+    "name": "Mehdia Golf",
+    "lat": 35.763628,
+    "lng": -5.8537157
+  },
+  {
+    "name": "Homrani",
+    "lat": 35.777458,
+    "lng": -5.8056366
+  },
+  {
+    "name": "Pharmacie La Vie",
+    "lat": 35.711578,
+    "lng": -5.8045026
+  },
+  {
+    "name": "Pharmacie Khalil",
+    "lat": 35.7498298,
+    "lng": -5.8341479
+  },
+  {
+    "name": "Chair",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Narjiss Boukhalef",
+    "lat": 35.7696302,
+    "lng": -5.8033522
+  },
+  {
+    "name": "Pharmacie Bahrayen",
+    "lat": 35.7322957,
+    "lng": -5.8262032
+  },
+  {
+    "name": "Pharmacie AL ISSRAE",
+    "lat": 35.7588036,
+    "lng": -5.7865981
+  },
+  {
+    "name": "Pharmacie JIHANE",
+    "lat": 35.7418394,
+    "lng": -5.7754626
+  },
+  {
+    "name": "Pharmacie El Harrarine",
+    "lat": 35.7301202,
+    "lng": -5.8392428
+  },
+  {
+    "name": "Pharmacie Satfilage",
+    "lat": 35.7597392,
+    "lng": -5.8432367
+  },
+  {
+    "name": "Mister-khouch",
+    "lat": 35.7775965,
+    "lng": -5.8345603
+  },
+  {
+    "name": "Pharmacie Complexe Irfane 2",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Moncef",
+    "lat": 35.7505671,
+    "lng": -5.8389546
+  },
+  {
+    "name": "Benayad",
+    "lat": 35.7757809,
+    "lng": -5.8131021
+  },
+  {
+    "name": "Pharmacie Jawharat Tanja",
+    "lat": 35.7625681,
+    "lng": -5.8295062
+  },
+  {
+    "name": "Pharmacie Meftah El Khair",
+    "lat": 35.7678565,
+    "lng": -5.7733521
+  },
+  {
+    "name": "Pharmacie Nouvelle Casabarata",
+    "lat": 35.7625681,
+    "lng": -5.8295062
+  },
+  {
+    "name": "Pharmacie Safae",
+    "lat": 35.7495661,
+    "lng": -5.8678998
+  },
+  {
+    "name": "Pharmacie Mosafir",
+    "lat": 35.7625681,
+    "lng": -5.8295062
+  },
+  {
+    "name": "Pharmacie Bouhout Al Aouama",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Chejirat",
+    "lat": 35.7625681,
+    "lng": -5.8295062
+  },
+  {
+    "name": "Pharmacie Nouvelle Gare",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Masjid Al Mouhit",
+    "lat": 35.7623248,
+    "lng": -5.8476763
+  },
+  {
+    "name": "Pharmacie Ben Abbou",
+    "lat": 35.7502012,
+    "lng": -5.8548509
+  },
+  {
+    "name": "Du Golf",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Al Fajr",
+    "lat": 35.7774782,
+    "lng": -5.805739
+  },
+  {
+    "name": "Pharmacie Al Madina Nord",
+    "lat": 35.7673213,
+    "lng": -5.8529367
+  },
+  {
+    "name": "Pharmacie Du Grand Stade",
+    "lat": 35.7380723,
+    "lng": -5.8478506
+  },
+  {
+    "name": "Pharmacie Oudaya",
+    "lat": 35.7258759,
+    "lng": -5.79059
+  },
+  {
+    "name": "San Francisco",
+    "lat": 35.7831046,
+    "lng": -5.8170161
+  },
+  {
+    "name": "Pharmacie Ibouyen",
+    "lat": 35.7709348,
+    "lng": -5.7648886
+  },
+  {
+    "name": "Pharmacie Branes Kedima",
+    "lat": 35.7604372,
+    "lng": -5.8327464
+  },
+  {
+    "name": "Ibn Al Arabi",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Souk M'sallah",
+    "lat": 35.7770996,
+    "lng": -5.8037901
+  },
+  {
+    "name": "Pharmacie Zeroual",
+    "lat": 35.7760777,
+    "lng": -5.8140894
+  },
+  {
+    "name": "Populaire",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Imam Chadili",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Soleil",
+    "lat": 35.7746879,
+    "lng": -5.8101208
+  },
+  {
+    "name": "Jamila",
+    "lat": 35.7729342,
+    "lng": -5.8140441
+  },
+  {
+    "name": "Pharmacie Phardet",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Hay Mrabett Ii",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Arrahman",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Route El Aouama",
+    "lat": 35.7345603,
+    "lng": -5.7881644
+  },
+  {
+    "name": "Pharmacie Al Boughaz",
+    "lat": 35.779907,
+    "lng": -5.815633
+  },
+  {
+    "name": "Mouadafine",
+    "lat": 35.7590671,
+    "lng": -5.8189025
+  },
+  {
+    "name": "Hay Al Manar",
+    "lat": 35.7594375,
+    "lng": -5.8497111
+  },
+  {
+    "name": "Malabata",
+    "lat": 35.7800557,
+    "lng": -5.7642172
+  },
+  {
+    "name": "Pharmacie El Mesnaoui",
+    "lat": 35.734718,
+    "lng": -5.8274734
+  },
+  {
+    "name": "Pharmacie Najah",
+    "lat": 35.7479244,
+    "lng": -5.7727931
+  },
+  {
+    "name": "Pharmacie Al Farabi",
+    "lat": 35.7722307,
+    "lng": -5.807705
+  },
+  {
+    "name": "Camelia",
+    "lat": 35.7521655,
+    "lng": -5.8395828
+  },
+  {
+    "name": "Pharmacie Assalama",
+    "lat": 35.7517533,
+    "lng": -5.8116138
+  },
+  {
+    "name": "Pharmacie Al Kawthar",
+    "lat": 35.7450227,
+    "lng": -5.8392917
+  },
+  {
+    "name": "Pharmacie Pharmaceie Arimas",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Madrid",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Souk M 039 Sallah",
+    "lat": 35.7773008,
+    "lng": -5.8167905
+  },
+  {
+    "name": "Riad Medic",
+    "lat": 35.7354706,
+    "lng": -5.864201
+  },
+  {
+    "name": "Pharmacie Ibn Tachfine",
+    "lat": 35.7715508,
+    "lng": -5.8025659
+  },
+  {
+    "name": "Pharmacie Al Khair",
+    "lat": 35.7678565,
+    "lng": -5.7733521
+  },
+  {
+    "name": "Pharmacie Galerie Andalucia",
+    "lat": 35.7788145,
+    "lng": -5.8475187
+  },
+  {
+    "name": "Pharmacie Al Hanae",
+    "lat": 35.7307885,
+    "lng": -5.8029577
+  },
+  {
+    "name": "Pharmacie Al Massira",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Trial Atlas",
+    "lat": 35.7676403,
+    "lng": -5.8391159
+  },
+  {
+    "name": "Pharmacie Al Masjid",
+    "lat": 35.7521489,
+    "lng": -5.8368697
+  },
+  {
+    "name": "Annour",
+    "lat": 35.7813065,
+    "lng": -5.8286877
+  },
+  {
+    "name": "Pharmacie Al Madina",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Bekouri",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Leila",
+    "lat": 35.7483456,
+    "lng": -5.777918
+  },
+  {
+    "name": "Pharmacie Tanja Al Koubra",
+    "lat": 35.7523311,
+    "lng": -5.8520954
+  },
+  {
+    "name": "Al Karam",
+    "lat": 35.7529915,
+    "lng": -5.8084108
+  },
+  {
+    "name": "Pharmacie Ech-chaymae",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Chairi",
+    "lat": 35.7696302,
+    "lng": -5.8033522
+  },
+  {
+    "name": "Mabrouka",
+    "lat": 35.7892683,
+    "lng": -5.8158529
+  },
+  {
+    "name": "Pharmacie Sekka Aouama",
+    "lat": 35.7322097,
+    "lng": -5.7944979
+  },
+  {
+    "name": "Drissia",
+    "lat": 35.7601781,
+    "lng": -5.8036012
+  },
+  {
+    "name": "Pharmacie Tufarma",
+    "lat": 35.7349844,
+    "lng": -5.889697
+  },
+  {
+    "name": "Hay Bouhout",
+    "lat": 35.7553471,
+    "lng": -5.8055762
+  },
+  {
+    "name": "Pharmacie Avenue Koweit",
+    "lat": 35.7392585,
+    "lng": -5.8119835
+  },
+  {
+    "name": "Al Balsam",
+    "lat": 35.750925,
+    "lng": -5.8420682
+  },
+  {
+    "name": "Pharmacie Ibrahim Al Khalil",
+    "lat": 35.7461071,
+    "lng": -5.8510157
+  },
+  {
+    "name": "Pharmacie Ataallah",
+    "lat": 35.7684,
+    "lng": -5.8625434
+  },
+  {
+    "name": "Pharmacie Aziza De Tanger",
+    "lat": 35.71592,
+    "lng": -5.8086498
+  },
+  {
+    "name": "Tanmia",
+    "lat": 35.7371241,
+    "lng": -5.7655649
+  },
+  {
+    "name": "Pharmacie MESNANA",
+    "lat": 35.7770996,
+    "lng": -5.8037901
+  },
+  {
+    "name": "Sania",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Louay",
+    "lat": 35.7696302,
+    "lng": -5.8033522
+  },
+  {
+    "name": "Pharmacie Al Rahma",
+    "lat": 35.7660232,
+    "lng": -5.804926
+  },
+  {
+    "name": "Dhar El Mers",
+    "lat": 35.7667416,
+    "lng": -5.7650497
+  },
+  {
+    "name": "Taissir",
+    "lat": 35.7315909,
+    "lng": -5.8821635
+  },
+  {
+    "name": "Al Firdaous",
+    "lat": 35.7542744,
+    "lng": -5.8277484
+  },
+  {
+    "name": "Pharmacie Grand Maghrib",
+    "lat": 35.7282846,
+    "lng": -5.8061376
+  },
+  {
+    "name": "Pharmacie Bennani Tarik Achakar",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Sanawbar",
+    "lat": 35.7575116,
+    "lng": -5.8369272
+  },
+  {
+    "name": "Pharmacie Complexe Al Hassani",
+    "lat": 35.7370726,
+    "lng": -5.8555493
+  },
+  {
+    "name": "Hadia",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Pasteur",
+    "lat": 35.7810797,
+    "lng": -5.8123815
+  },
+  {
+    "name": "Pharmacie Sophia",
+    "lat": 35.7611536,
+    "lng": -5.8579274
+  },
+  {
+    "name": "Anas",
+    "lat": 35.7519657,
+    "lng": -5.8150049
+  },
+  {
+    "name": "Pharmacie Badri",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie NARJIS",
+    "lat": 35.7557152,
+    "lng": -5.8348222
+  },
+  {
+    "name": "Pharmacie La Wilaya",
+    "lat": 35.7725945,
+    "lng": -5.8113934
+  },
+  {
+    "name": "Pharmacie Bouarraquia",
+    "lat": 35.7825722,
+    "lng": -5.8180387
+  },
+  {
+    "name": "Pharmacie Mabrouki",
+    "lat": 35.7539145,
+    "lng": -5.8133447
+  },
+  {
+    "name": "Pharmacie Al Hambra",
+    "lat": 35.7396519,
+    "lng": -5.8056252
+  },
+  {
+    "name": "Al Raha",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Jebari",
+    "lat": 35.7520633,
+    "lng": -5.8663807
+  },
+  {
+    "name": "Al Hourria",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Chifae",
+    "lat": 35.7442588,
+    "lng": -5.8182951
+  },
+  {
+    "name": "Pharmacie Ajial",
+    "lat": 35.730484,
+    "lng": -5.8452902
+  },
+  {
+    "name": "El Amile",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie La Raison",
+    "lat": 35.7671793,
+    "lng": -5.8446337
+  },
+  {
+    "name": "Ouahid",
+    "lat": 35.7556153,
+    "lng": -5.8568877
+  },
+  {
+    "name": "Pharmacie Pharmacie Mechkouri Dhar Kanfoud",
+    "lat": 35.7329713,
+    "lng": -5.815238
+  },
+  {
+    "name": "Pharmacie Al Amal",
+    "lat": 35.7623047,
+    "lng": -5.819555
+  },
+  {
+    "name": "Boutour",
+    "lat": 35.7633611,
+    "lng": -5.7701023
+  },
+  {
+    "name": "Pharmacie Palestine Ex Ph Aoufi",
+    "lat": 35.7638576,
+    "lng": -5.7910254
+  },
+  {
+    "name": "Mechkouri Dhar Kanfo",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Al Boustane",
+    "lat": 35.776549,
+    "lng": -5.861132
+  },
+  {
+    "name": "Pharmacie Fleming",
+    "lat": 35.7444342,
+    "lng": -5.8547966
+  },
+  {
+    "name": "Pharmacie Charrat",
+    "lat": 35.7567548,
+    "lng": -5.8620541
+  },
+  {
+    "name": "Pharmacie Ben Taeib",
+    "lat": 35.767444,
+    "lng": -5.8179189
+  },
+  {
+    "name": "Pharmacie Jnane Marjane",
+    "lat": 35.7478346,
+    "lng": -5.8459135
+  },
+  {
+    "name": "Pharmacie Bir El Ghazi",
+    "lat": 35.7131151,
+    "lng": -5.8110149
+  },
+  {
+    "name": "Pharmacie Principale",
+    "lat": 35.7539501,
+    "lng": -5.8417075
+  },
+  {
+    "name": "Pharmacie IMAM MOUSLIM",
+    "lat": 35.7770996,
+    "lng": -5.8037901
+  },
+  {
+    "name": "Doha Louama",
+    "lat": 35.7770996,
+    "lng": -5.8037901
+  },
+  {
+    "name": "Madchar Aouama",
+    "lat": 35.7244627,
+    "lng": -5.8030847
+  },
+  {
+    "name": "Pharmacie El Moufid",
+    "lat": 35.7465555,
+    "lng": -5.8353402
+  },
+  {
+    "name": "Pharmacie Bouhayrat El Aouama",
+    "lat": 35.7345603,
+    "lng": -5.7881644
+  },
+  {
+    "name": "Pharmacie Jamie Al Azhar",
+    "lat": 35.739045,
+    "lng": -5.8003867
+  },
+  {
+    "name": "Pharmacie Bendahmane",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Khandak Dir",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Aazib Abakkiwe",
+    "lat": 35.7253095,
+    "lng": -5.771092
+  },
+  {
+    "name": "Pharmacie ElAouama",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Al Aouda",
+    "lat": 35.7468925,
+    "lng": -5.8063044
+  },
+  {
+    "name": "Pharmacie Metioui",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Méditerranée",
+    "lat": 35.7691544,
+    "lng": -5.7674605
+  },
+  {
+    "name": "Branes Ii",
+    "lat": 35.7604372,
+    "lng": -5.8327464
+  },
+  {
+    "name": "Val Fleuri",
+    "lat": 35.7678984,
+    "lng": -5.8323879
+  },
+  {
+    "name": "Pharmacie Mghogha Kbira",
+    "lat": 35.750453,
+    "lng": -5.7803675
+  },
+  {
+    "name": "Pharmacie Khandaq El Ward",
+    "lat": 35.7803199,
+    "lng": -5.8058221
+  },
+  {
+    "name": "Aouama Gharbia",
+    "lat": 35.7244627,
+    "lng": -5.8030847
+  },
+  {
+    "name": "Pharmacie Al Kodss",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Pharmacie Al Moustakbal",
+    "lat": 35.733607,
+    "lng": -5.8689729
+  },
+  {
+    "name": "Pharmacie El Gharbi",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Souk El Bakar",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Iqrae",
+    "lat": 35.7642313,
+    "lng": -5.8429614
+  },
+  {
+    "name": "Pharmacie Europharm",
+    "lat": 35.716845,
+    "lng": -5.8046129
+  },
+  {
+    "name": "Al Baraka",
+    "lat": 35.7344012,
+    "lng": -5.863778
+  },
+  {
+    "name": "Passadena",
+    "lat": 35.735182,
+    "lng": -5.765796
+  },
+  {
+    "name": "Pharmacie M 039 Ghogha",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Riad Achifaa",
+    "lat": 35.7352022,
+    "lng": -5.8341342
+  },
+  {
+    "name": "Pharmacie Dar D 039 Bagh",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Salima",
+    "lat": 35.7204802,
+    "lng": -5.7919713
+  },
+  {
+    "name": "Pharmacie Abdelmjid Atia",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "La Source",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Ward Louama",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie L 039 Amitie",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Zouhir",
+    "lat": 35.7617861,
+    "lng": -5.760745
+  },
+  {
+    "name": "Pharmacie El Hekma",
+    "lat": 35.7537375,
+    "lng": -5.8150816
+  },
+  {
+    "name": "Pharmacie Khalifa",
+    "lat": 35.7206872,
+    "lng": -5.8140572
+  },
+  {
+    "name": "Pharmacie Abas Sebti",
+    "lat": 35.7595061,
+    "lng": -5.8340282
+  },
+  {
+    "name": "Pharmacie Tissir 2",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Abdellatif",
+    "lat": 35.7672556,
+    "lng": -5.8147829
+  },
+  {
+    "name": "Pharmacie Universite",
+    "lat": 35.7338422,
+    "lng": -5.8847856
+  },
+  {
+    "name": "Pharmacie Centrale",
+    "lat": 35.7801059,
+    "lng": -5.8101046
+  },
+  {
+    "name": "Pharmacie Tingis",
+    "lat": 35.785524,
+    "lng": -5.8255629
+  },
+  {
+    "name": "Pharmacie Abdelmjid Al Atia",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Taj Eddine",
+    "lat": 35.7652852,
+    "lng": -5.8343948
+  },
+  {
+    "name": "Laaziza",
+    "lat": 35.7720294,
+    "lng": -5.7951222
+  },
+  {
+    "name": "Pharmacie Bait Al Makdiss",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Malabata Hills",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Ech Chaymae",
+    "lat": 35.71752,
+    "lng": -5.8755607
+  },
+  {
+    "name": "Pharmacie Imam Malek",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Annajat",
+    "lat": 35.7699926,
+    "lng": -5.8318844
+  },
+  {
+    "name": "Hay Ouarda",
+    "lat": 35.7538321,
+    "lng": -5.8182759
+  },
+  {
+    "name": "Pharmacie Branes 2",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Dar Al Ihssan",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Lalla Chafia",
+    "lat": 35.7726658,
+    "lng": -5.8189025
+  },
+  {
+    "name": "Pharmacie Hay Rayhane",
+    "lat": 35.7696302,
+    "lng": -5.8033522
+  },
+  {
+    "name": "Pharmacie M 039 Sallah",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Massira",
+    "lat": 35.7538986,
+    "lng": -5.8622727
+  },
+  {
+    "name": "Pharmacie Al Fahs",
+    "lat": 35.7502927,
+    "lng": -5.8148637
+  },
+  {
+    "name": "Pharmacie Bab Al Andalous",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Grande Pharmacie Malabata",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlBoughaz",
+    "lat": 35.779907,
+    "lng": -5.815633
+  },
+  {
+    "name": "Pharmacie Hay Al Inara",
+    "lat": 35.7510948,
+    "lng": -5.8620707
+  },
+  {
+    "name": "Pharmacie Ghailane",
+    "lat": 35.7595061,
+    "lng": -5.8340281
+  },
+  {
+    "name": "Riad Ahlen",
+    "lat": 35.7424541,
+    "lng": -5.837916
+  },
+  {
+    "name": "Pharmacie Bayad",
+    "lat": 35.7294861,
+    "lng": -5.8270708
+  },
+  {
+    "name": "El Alia",
+    "lat": 35.7621898,
+    "lng": -5.7913595
+  },
+  {
+    "name": "Pharmacie IBN TOUFAIL",
+    "lat": 35.7449157,
+    "lng": -5.823396
+  },
+  {
+    "name": "Moustaghfir",
+    "lat": 35.7468262,
+    "lng": -5.8672733
+  },
+  {
+    "name": "Pharmacie El Houda",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie El Attiffi",
+    "lat": 35.756606,
+    "lng": -5.8208009
+  },
+  {
+    "name": "M'sallah",
+    "lat": 35.7768724,
+    "lng": -5.8162659
+  },
+  {
+    "name": "Pharmacie Mosque El Fath",
+    "lat": 35.7646262,
+    "lng": -5.7829067
+  },
+  {
+    "name": "Pharmacie Al Bouchra",
+    "lat": 35.7258971,
+    "lng": -5.8362107
+  },
+  {
+    "name": "Pharmacie Al Fath",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Lamtafi",
+    "lat": 35.7882533,
+    "lng": -5.8247498
+  },
+  {
+    "name": "Pharmacie Paris",
+    "lat": 35.7807342,
+    "lng": -5.812227
+  },
+  {
+    "name": "Badr",
+    "lat": 35.7593073,
+    "lng": -5.8526689
+  },
+  {
+    "name": "Nouvelle",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Anfas",
+    "lat": 35.7688991,
+    "lng": -5.8170859
+  },
+  {
+    "name": "Pharmacie Ouahabi",
+    "lat": 35.7814348,
+    "lng": -5.8467904
+  },
+  {
+    "name": "Irchad",
+    "lat": 35.7614668,
+    "lng": -5.7924588
+  },
+  {
+    "name": "Pharmacie Palestine (ex Ph.aoufi)",
+    "lat": 35.7638576,
+    "lng": -5.7910254
+  },
+  {
+    "name": "Pharmacie El Manhaj",
+    "lat": 35.7301202,
+    "lng": -5.8392428
+  },
+  {
+    "name": "Pharmacie Complexe Al Baraka",
+    "lat": 35.7319264,
+    "lng": -5.8175842
+  },
+  {
+    "name": "Pharmacie Gde Phcie Assia",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Belkacem",
+    "lat": 35.7791872,
+    "lng": -5.8096711
+  },
+  {
+    "name": "Pharmacie Al Yasmine",
+    "lat": 35.7571786,
+    "lng": -5.8405149
+  },
+  {
+    "name": "Taj-eddine",
+    "lat": 35.7652852,
+    "lng": -5.8343948
+  },
+  {
+    "name": "Rabea Al Adaouia",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Moulay Youssef",
+    "lat": 35.7706723,
+    "lng": -5.81011
+  },
+  {
+    "name": "Pharmacie Tangerine",
+    "lat": 35.7642313,
+    "lng": -5.8429614
+  },
+  {
+    "name": "Pharmacie Boughlala",
+    "lat": 35.7295975,
+    "lng": -5.8350009
+  },
+  {
+    "name": "Pharmacie El Hadri",
+    "lat": 35.7359954,
+    "lng": -5.8306717
+  },
+  {
+    "name": "Pharmacie Hay Gambouria",
+    "lat": 35.7138936,
+    "lng": -5.8062888
+  },
+  {
+    "name": "Pharmacie Zarima",
+    "lat": 35.7274644,
+    "lng": -5.8441136
+  },
+  {
+    "name": "Pharmacie Fehmi",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Amalat Beni Makada",
+    "lat": 35.7503222,
+    "lng": -5.816925
+  },
+  {
+    "name": "Hay Boughaz",
+    "lat": 35.7602616,
+    "lng": -5.8137365
+  },
+  {
+    "name": "Pharmacie Khadak Dir",
+    "lat": 35.7228934,
+    "lng": -5.7918414
+  },
+  {
+    "name": "Pharmacie Yamania",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Mly Ali Cherif",
+    "lat": 35.751542,
+    "lng": -5.8020333
+  },
+  {
+    "name": "Pharmacie Souani",
+    "lat": 35.7711148,
+    "lng": -5.8228576
+  },
+  {
+    "name": "Pharmacie IBN ROCHD",
+    "lat": 35.7782431,
+    "lng": -5.8191289
+  },
+  {
+    "name": "Pharmacie Al Idrissi",
+    "lat": 35.7462601,
+    "lng": -5.8170246
+  },
+  {
+    "name": "Pharmacie Al Ouroud Malika",
+    "lat": 35.7263951,
+    "lng": -5.8093875
+  },
+  {
+    "name": "Pharmacie Al Boraq",
+    "lat": 35.7666663,
+    "lng": -5.7865551
+  },
+  {
+    "name": "Pharmacie Al Mouna",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Aross Chamal",
+    "lat": 35.7401035,
+    "lng": -5.7650446
+  },
+  {
+    "name": "Pharmacie Alidrissi",
+    "lat": 35.7462601,
+    "lng": -5.8170246
+  },
+  {
+    "name": "Pharmacie Rte De Rabat",
+    "lat": 35.7463983,
+    "lng": -5.8382833
+  },
+  {
+    "name": "Pharmacie Al Jamae",
+    "lat": 35.7432177,
+    "lng": -5.8203892
+  },
+  {
+    "name": "Annassiha",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Anfa",
+    "lat": 35.7718435,
+    "lng": -5.831125
+  },
+  {
+    "name": "Pharmacie Moucharraf",
+    "lat": 35.7307443,
+    "lng": -5.7709993
+  },
+  {
+    "name": "Charf",
+    "lat": 35.7682687,
+    "lng": -5.7902359
+  },
+  {
+    "name": "Pharmacie El Yamouni",
+    "lat": 35.7671301,
+    "lng": -5.7696796
+  },
+  {
+    "name": "Pharmacie AIN ECHIFAE",
+    "lat": 35.735226,
+    "lng": -5.851035
+  },
+  {
+    "name": "Al Bayrouni",
+    "lat": 35.7514942,
+    "lng": -5.8479901
+  },
+  {
+    "name": "Hamza",
+    "lat": 35.7757112,
+    "lng": -5.8005075
+  },
+  {
+    "name": "Pharmacie Sante City Center",
+    "lat": 35.770443,
+    "lng": -5.7824864
+  },
+  {
+    "name": "Pharmacie Sahat Al Oumam",
+    "lat": 35.7751927,
+    "lng": -5.8052903
+  },
+  {
+    "name": "Pharmacie Mghogha Tabchicha",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Ben Allal",
+    "lat": 35.7552417,
+    "lng": -5.802029
+  },
+  {
+    "name": "Pharmacie Grande Pharmacie Rif",
+    "lat": 35.7537733,
+    "lng": -5.8098571
+  },
+  {
+    "name": "Miko",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Bayti",
+    "lat": 35.7316176,
+    "lng": -5.8486788
+  },
+  {
+    "name": "Al Azhar",
+    "lat": 35.739045,
+    "lng": -5.8003867
+  },
+  {
+    "name": "Sania Malabata",
+    "lat": 35.779994,
+    "lng": -5.75819
+  },
+  {
+    "name": "Pharmacie Al Yakine",
+    "lat": 35.7519907,
+    "lng": -5.7964321
+  },
+  {
+    "name": "La Grande Pharmacie Sara",
+    "lat": 35.7381161,
+    "lng": -5.8358186
+  },
+  {
+    "name": "Fadili",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "La Perle Du Baughaz",
+    "lat": 35.7638134,
+    "lng": -5.8169408
+  },
+  {
+    "name": "Pharmacie Al Kawacim",
+    "lat": 35.7641717,
+    "lng": -5.8562296
+  },
+  {
+    "name": "Pharmacie Al Aziziya",
+    "lat": 35.7387381,
+    "lng": -5.8402417
+  },
+  {
+    "name": "Salaheddine",
+    "lat": 35.7544213,
+    "lng": -5.837617
+  },
+  {
+    "name": "Pharmacie Masjid Mabrouka",
+    "lat": 35.7892683,
+    "lng": -5.8158529
+  },
+  {
+    "name": "Zemzem",
+    "lat": 35.7479125,
+    "lng": -5.8153281
+  },
+  {
+    "name": "Fares",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Ibn Sina",
+    "lat": 35.7866062,
+    "lng": -5.8208635
+  },
+  {
+    "name": "Arrabie",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Maha",
+    "lat": 35.7537858,
+    "lng": -5.8520755
+  },
+  {
+    "name": "Place Des Arenes",
+    "lat": 35.7552409,
+    "lng": -5.7964025
+  },
+  {
+    "name": "Pharmacie Ramses",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Randa",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "De Tanger",
+    "lat": 35.7411572,
+    "lng": -5.8580578
+  },
+  {
+    "name": "Pharmacie Beni Ouriaghel",
+    "lat": 35.7462956,
+    "lng": -5.8297523
+  },
+  {
+    "name": "Laazifat",
+    "lat": 35.7530005,
+    "lng": -5.8040252
+  },
+  {
+    "name": "Pharmacie Anegay",
+    "lat": 35.7575855,
+    "lng": -5.8141082
+  },
+  {
+    "name": "Marbella",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Chorafa",
+    "lat": 35.7674984,
+    "lng": -5.7911434
+  },
+  {
+    "name": "Arreda",
+    "lat": 35.7625408,
+    "lng": -5.7625602
+  },
+  {
+    "name": "Pharmacie Riad Al Kawtar",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Marche De Gros Aouam",
+    "lat": 35.7500321,
+    "lng": -5.7943801
+  },
+  {
+    "name": "Dar D'bagh",
+    "lat": 35.7853551,
+    "lng": -5.8087458
+  },
+  {
+    "name": "Pharmacie Bismillah",
+    "lat": 35.7716472,
+    "lng": -5.7993275
+  },
+  {
+    "name": "El Ghandouri",
+    "lat": 35.7823881,
+    "lng": -5.7612547
+  },
+  {
+    "name": "Pharmacie Maghreb",
+    "lat": 35.7824919,
+    "lng": -5.8128401
+  },
+  {
+    "name": "Pharmacie El Hsissen",
+    "lat": 35.7642313,
+    "lng": -5.8429614
+  },
+  {
+    "name": "Pharmacie Al Kantara",
+    "lat": 35.7589139,
+    "lng": -5.8215497
+  },
+  {
+    "name": "Ibn Khaldoun",
+    "lat": 35.7724779,
+    "lng": -5.8234516
+  },
+  {
+    "name": "Pharmacie Moulay Ismail",
+    "lat": 35.7670045,
+    "lng": -5.807793
+  },
+  {
+    "name": "Pharmacie El Aouama",
+    "lat": 35.7432819,
+    "lng": -5.7997422
+  },
+  {
+    "name": "Al Hamd",
+    "lat": 35.7427005,
+    "lng": -5.8394292
+  },
+  {
+    "name": "Cervantes",
+    "lat": 35.7806168,
+    "lng": -5.8138276
+  },
+  {
+    "name": "Pharmacie Aouama Charkia",
+    "lat": 35.723976,
+    "lng": -5.7996109
+  },
+  {
+    "name": "Pharmacie Bd Moulay Rachid",
+    "lat": 35.7672513,
+    "lng": -5.8333058
+  },
+  {
+    "name": "Granada",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Al Ghazali",
+    "lat": 35.7697197,
+    "lng": -5.8210848
+  },
+  {
+    "name": "Makarim",
+    "lat": 35.7510662,
+    "lng": -5.8019024
+  },
+  {
+    "name": "Pharmacie Ain Jdida",
+    "lat": 35.7461006,
+    "lng": -5.7754448
+  },
+  {
+    "name": "Boubana",
+    "lat": 35.7801579,
+    "lng": -5.8356753
+  },
+  {
+    "name": "Pharmacie Bab El Bhar",
+    "lat": 35.7888992,
+    "lng": -5.8120643
+  },
+  {
+    "name": "Pharmacie La Gare Routière",
+    "lat": 35.7228772,
+    "lng": -5.8610563
+  },
+  {
+    "name": "Beni Makada",
+    "lat": 35.7503222,
+    "lng": -5.816925
+  },
+  {
+    "name": "Pharmacie Tarik Al Moujahidine",
+    "lat": 35.7671199,
+    "lng": -5.8477067
+  },
+  {
+    "name": "Pharmacie Al Faraj Rahrah",
+    "lat": 35.7373837,
+    "lng": -5.8835629
+  },
+  {
+    "name": "Al Assil",
+    "lat": 35.7311222,
+    "lng": -5.7661671
+  },
+  {
+    "name": "Hjar Sfar",
+    "lat": 35.7229088,
+    "lng": -5.7892051
+  },
+  {
+    "name": "Erradi",
+    "lat": 35.7486478,
+    "lng": -5.837675
+  },
+  {
+    "name": "Taferssiti",
+    "lat": 35.7412869,
+    "lng": -5.8335929
+  },
+  {
+    "name": "Doha",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Annasr",
+    "lat": 35.753053,
+    "lng": -5.8307685
+  },
+  {
+    "name": "Pharmacie AL FARAJ",
+    "lat": 35.7373837,
+    "lng": -5.8835629
+  },
+  {
+    "name": "Saada",
+    "lat": 35.7424278,
+    "lng": -5.8368684
+  },
+  {
+    "name": "Pharmacie La Gare",
+    "lat": 35.7711073,
+    "lng": -5.7856729
+  },
+  {
+    "name": "Pharmacie Zouitina",
+    "lat": 35.7328837,
+    "lng": -5.8116094
+  },
+  {
+    "name": "Phcie 2000",
+    "lat": 35.7688621,
+    "lng": -5.8116021
+  },
+  {
+    "name": "Pharmacie Noran",
+    "lat": 35.7602211,
+    "lng": -5.757961
+  },
+  {
+    "name": "Pharmacie Cite Des Sports",
+    "lat": 35.7696302,
+    "lng": -5.8033522
+  },
+  {
+    "name": "Andalucia",
+    "lat": 35.7779125,
+    "lng": -5.8474179
+  },
+  {
+    "name": "Pharmacie Lycee",
+    "lat": 35.7782512,
+    "lng": -5.8095981
+  },
+  {
+    "name": "Pharmacie Ben Yaich",
+    "lat": 35.7474889,
+    "lng": -5.8627373
+  },
+  {
+    "name": "Achenad",
+    "lat": 35.7404984,
+    "lng": -5.8314743
+  },
+  {
+    "name": "Pharmacie Assabr",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Moderne",
+    "lat": 35.7841098,
+    "lng": -5.8126846
+  },
+  {
+    "name": "Pharmacie Bismiallah",
+    "lat": 35.7716472,
+    "lng": -5.7993275
+  },
+  {
+    "name": "Pharmacie Alhambra",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Jirari",
+    "lat": 35.7520047,
+    "lng": -5.8130267
+  },
+  {
+    "name": "Pharmacie Al Irfane",
+    "lat": 35.7323937,
+    "lng": -5.8818752
+  },
+  {
+    "name": "El Kindy",
+    "lat": 35.7730198,
+    "lng": -5.8220942
+  },
+  {
+    "name": "Pharmacie Soussia",
+    "lat": 35.7615516,
+    "lng": -5.8537811
+  },
+  {
+    "name": "Ibn Annafis",
+    "lat": 35.7613726,
+    "lng": -5.8172443
+  },
+  {
+    "name": "Bel Air",
+    "lat": 35.7725656,
+    "lng": -5.8261527
+  },
+  {
+    "name": "Pharmacie Adam",
+    "lat": 35.7314387,
+    "lng": -5.7880175
+  },
+  {
+    "name": "Pharmacie Sidi Boukhari",
+    "lat": 35.7829641,
+    "lng": -5.8326776
+  },
+  {
+    "name": "Pharmacie Lotis Ibn Khaldoun",
+    "lat": 35.7724779,
+    "lng": -5.8234516
+  },
+  {
+    "name": "Pharmacie Coeur De Tanger",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Brooks",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Grande Pharmacie Souani",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Anwal",
+    "lat": 35.7501174,
+    "lng": -5.799373
+  },
+  {
+    "name": "Pharmacie Imam Chadli",
+    "lat": 35.766667,
+    "lng": -5.8
+  },
+  {
+    "name": "Pharmacie Perle De Mediterranee",
+    "lat": 35.7673582,
+    "lng": -5.7611124
+  },
+  {
+    "name": "Complexe Irfane Ii",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Bni Touzine",
+    "lat": 35.7358014,
+    "lng": -5.8434693
+  },
+  {
+    "name": "Pharmacie Haoumat Fatima",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Al Madkhal Al Karim",
+    "lat": 35.769935,
+    "lng": -5.7892334
+  },
+  {
+    "name": "Aida",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie L'amitie",
+    "lat": 35.7232447,
+    "lng": -5.8780659
+  },
+  {
+    "name": "Imam Chatebi",
+    "lat": 35.7768256,
+    "lng": -5.8317664
+  },
+  {
+    "name": "Pharmacie Akalai",
+    "lat": 35.7674401,
+    "lng": -5.7523914
+  },
+  {
+    "name": "Pharmacie Azhar Chifae",
+    "lat": 35.7203466,
+    "lng": -5.7979118
+  },
+  {
+    "name": "Pharmacie Achakkar",
+    "lat": 35.7450273,
+    "lng": -5.8845177
+  },
+  {
+    "name": "Pharmacie Omar Ibn Khattab",
+    "lat": 35.7586545,
+    "lng": -5.8593169
+  },
+  {
+    "name": "Pharmacie Al Amana",
+    "lat": 35.7339544,
+    "lng": -5.8764717
+  },
+  {
+    "name": "Pharmacie El Yousr",
+    "lat": 35.7786246,
+    "lng": -5.8080711
+  },
+  {
+    "name": "Pharmacie La Sante",
+    "lat": 35.7583743,
+    "lng": -5.8014277
+  },
+  {
+    "name": "Pharmacie Casa Barata",
+    "lat": 35.7670555,
+    "lng": -5.8212341
+  },
+  {
+    "name": "Pharmacie Tanger Ville",
+    "lat": 35.7346204,
+    "lng": -5.839662
+  },
+  {
+    "name": "Pharmacie El Attifi",
+    "lat": 35.7774341,
+    "lng": -5.8032309
+  },
+  {
+    "name": "Pharmacie Chams Al Aouama",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Chams Aouama",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie Haoumat Zaidi",
+    "lat": 35.7334709,
+    "lng": -5.7598019
+  },
+  {
+    "name": "Pharmacie Beni Said",
+    "lat": 35.7311612,
+    "lng": -5.8334058
+  },
+  {
+    "name": "Pharmacie Al Majd",
+    "lat": 35.7453116,
+    "lng": -5.7977272
+  },
+  {
+    "name": "Pharmacie El Attabi",
+    "lat": 35.7369874,
+    "lng": -5.8030544
+  },
+  {
+    "name": "Pharmacie Branes",
+    "lat": 35.7628227,
+    "lng": -5.8249475
+  },
+  {
+    "name": "Riad",
+    "lat": 35.783862,
+    "lng": -5.757681
+  },
+  {
+    "name": "Les Palmiers",
+    "lat": 35.7803079,
+    "lng": -5.8056151
+  },
+  {
+    "name": "Arrazi",
+    "lat": 35.7794007,
+    "lng": -5.8131117
+  },
+  {
+    "name": "Raihani",
+    "lat": 35.7463133,
+    "lng": -5.8383352
+  },
+  {
+    "name": "6 Novembre",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Zone Industrielle",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Boukhalef",
+    "lat": 35.7358498,
+    "lng": -5.890794
+  },
+  {
+    "name": "Dina",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Chams Ahlen",
+    "lat": 35.7422414,
+    "lng": -5.8384024
+  },
+  {
+    "name": "Pharmacie Bir Chifae",
+    "lat": 35.7427711,
+    "lng": -5.8257992
+  },
+  {
+    "name": "Pharmacie Place des Nations",
+    "lat": 35.7769589,
+    "lng": -5.8039085
+  },
+  {
+    "name": "Pharmacie AlImam Malik",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Mister Khouch",
+    "lat": 35.7740494,
+    "lng": -5.8328746
+  },
+  {
+    "name": "Syndicat des Pharmaciens d'Officine de Tanger",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Kasbah",
+    "lat": 35.788295,
+    "lng": -5.8153266
+  },
+  {
+    "name": "Pharmacie de la Santé",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Imam Boukhari",
+    "lat": 35.7601877,
+    "lng": -5.7888495
+  },
+  {
+    "name": "Pharmacie Ariha",
+    "lat": 35.7708862,
+    "lng": -5.8113171
+  },
+  {
+    "name": "Pharmacie des Arenes",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Zahara",
+    "lat": 35.7406032,
+    "lng": -5.8011838
+  },
+  {
+    "name": "Pharmacie Banafsaj",
+    "lat": 35.7876039,
+    "lng": -5.8350469
+  },
+  {
+    "name": "Pharmacie Albaraka",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Prefecture Beni Makada",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie du Quartier",
+    "lat": 35.7573509,
+    "lng": -5.7967385
+  },
+  {
+    "name": "Pharmacie Hay Benkirane",
+    "lat": 35.7601877,
+    "lng": -5.7888495
+  },
+  {
+    "name": "Pharmacie Tanja Balia",
+    "lat": 35.771431,
+    "lng": -5.7689323
+  },
+  {
+    "name": "Pharmacie Imam Nafie",
+    "lat": 35.7358498,
+    "lng": -5.890794
+  },
+  {
+    "name": "Pharmacie Provence",
+    "lat": 35.7643702,
+    "lng": -5.8083064
+  },
+  {
+    "name": "Pharmacie AlFarabi",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Sabila Jmaa",
+    "lat": 35.7882735,
+    "lng": -5.8294583
+  },
+  {
+    "name": "Grande Pharmacie Zeroual",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie ElKindy",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Bendibane",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie ElAttabi",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlJamae",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alhouria",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alidaa",
+    "lat": 35.7582539,
+    "lng": -5.8073317
+  },
+  {
+    "name": "Pharmacie Abbes",
+    "lat": 35.7562316,
+    "lng": -5.8440275
+  },
+  {
+    "name": "Pharmacie Fahs",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Anoual",
+    "lat": 35.7501174,
+    "lng": -5.799373
+  },
+  {
+    "name": "Pharmacie Bismi Allah",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Inas",
+    "lat": 35.7598844,
+    "lng": -5.830995
+  },
+  {
+    "name": "Pharmacie Masjid Marchan",
+    "lat": 35.7666146,
+    "lng": -5.800095
+  },
+  {
+    "name": "Pharmacie Casabarata",
+    "lat": 35.7670555,
+    "lng": -5.8212341
+  },
+  {
+    "name": "Pharmacie de la plage",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Ibn Batouta",
+    "lat": 35.7627851,
+    "lng": -5.8320173
+  },
+  {
+    "name": "Pharmacie AlKantara",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Ifriquia",
+    "lat": 35.7525261,
+    "lng": -5.8069899
+  },
+  {
+    "name": "Pharmacie Ibn Khatib",
+    "lat": 35.7753153,
+    "lng": -5.8201856
+  },
+  {
+    "name": "Pharmacie Zaoudia",
+    "lat": 35.7564108,
+    "lng": -5.8175842
+  },
+  {
+    "name": "Grande Pharmacie Branes",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlAouda",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Mly Youssef",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlHanae",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Yassine",
+    "lat": 35.7594651,
+    "lng": -5.8339543
+  },
+  {
+    "name": "Pharmacie Almasjid",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Afilal",
+    "lat": 35.7618592,
+    "lng": -5.7998854
+  },
+  {
+    "name": "Pharmacie Al-Ghazali",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Saâda",
+    "lat": 35.7631919,
+    "lng": -5.7958313
+  },
+  {
+    "name": "Pharmacie My Ali Cherif",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alamal",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alazhar",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Souk ElBakar",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie 2000",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alkhair",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alhilal",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Benallal",
+    "lat": 35.7552417,
+    "lng": -5.802029
+  },
+  {
+    "name": "Pharmacie Du nord",
+    "lat": 35.7584234,
+    "lng": -5.828004
+  },
+  {
+    "name": "Pharmacie Bab ElBhar",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Elhouda",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlRahma",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alkodss",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Mly Ismaïl",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie M'Ghogha",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Gibraltar",
+    "lat": 35.7795979,
+    "lng": -5.7568474
+  },
+  {
+    "name": "Pharmacie Badre",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Tafilalet",
+    "lat": 35.7571013,
+    "lng": -5.8102567
+  },
+  {
+    "name": "Pharmacie Bouaraquia",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlRaha",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Josafat",
+    "lat": 35.7857584,
+    "lng": -5.8162899
+  },
+  {
+    "name": "Pharmacie Alfath",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Asanawbar",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie ElHikma",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Complexe Hassani",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Achourouk",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Jnan Marjane",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Biladi",
+    "lat": 35.7671947,
+    "lng": -5.847926
+  },
+  {
+    "name": "Pharmacie El Mers",
+    "lat": 35.7391394,
+    "lng": -5.8252047
+  },
+  {
+    "name": "Pharmacie Hay N'Zaha",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Cap Spartel",
+    "lat": 35.7370738,
+    "lng": -5.8876617
+  },
+  {
+    "name": "Pharmacie Assafwa",
+    "lat": 35.7658378,
+    "lng": -5.858763
+  },
+  {
+    "name": "Pharmacie Aiche",
+    "lat": 35.7634841,
+    "lng": -5.7563478
+  },
+  {
+    "name": "Pharmacie AlAmana",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlIrfane",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie bd Mohamed VI",
+    "lat": 35.7753966,
+    "lng": -5.7870853
+  },
+  {
+    "name": "Pharmacie AlAssil",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie ElHadri",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Oued Sania",
+    "lat": 35.7688833,
+    "lng": -5.7572321
+  },
+  {
+    "name": "Pharmacie Tajeddine",
+    "lat": 35.777103,
+    "lng": -5.803792
+  },
+  {
+    "name": "Pharmacie La Famille",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Wissal",
+    "lat": 35.7323989,
+    "lng": -5.8554916
+  },
+  {
+    "name": "Pharmacie Imam Ali",
+    "lat": 35.7299985,
+    "lng": -5.8129191
+  },
+  {
+    "name": "Pharmacie ElBekouri",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlMadina",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlOuroud Malika",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie les Parents",
+    "lat": 35.7582055,
+    "lng": -5.8465226
+  },
+  {
+    "name": "Pharmacie Route de Rabat",
+    "lat": 35.729763,
+    "lng": -5.880189
+  },
+  {
+    "name": "Pharmacie Mosque ElFath",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Najid",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie de l'Université",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Aswak Assalam",
+    "lat": 35.7379833,
+    "lng": -5.8737731
+  },
+  {
+    "name": "Pharmacie Perle de Méditerranée",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Marché de Gros Aouama",
+    "lat": 35.7500321,
+    "lng": -5.7943801
+  },
+  {
+    "name": "La Grande Pharmacie Assia",
+    "lat": 35.7444156,
+    "lng": -5.8328393
+  },
+  {
+    "name": "Pharmacie Jade",
+    "lat": 35.77258,
+    "lng": -5.8054047
+  },
+  {
+    "name": "Pharmacie Al Ihssane",
+    "lat": 35.7576551,
+    "lng": -5.8527856
+  },
+  {
+    "name": "Pharmacie Al Andalous",
+    "lat": 35.7340969,
+    "lng": -5.8779439
+  },
+  {
+    "name": "Pharmacie Yousra",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Place du Maroc",
+    "lat": 35.7657247,
+    "lng": -5.81644
+  },
+  {
+    "name": "Pharmacie Aoufi",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlMassira",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Alissrae",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlFajr",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Ibn Barrajan",
+    "lat": 35.757593,
+    "lng": -5.8329867
+  },
+  {
+    "name": "Pharmacie Jardins Andalous",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Rahmouni",
+    "lat": 35.7726864,
+    "lng": -5.7921481
+  },
+  {
+    "name": "Pharmacie du Parc",
+    "lat": 35.7630115,
+    "lng": -5.8126903
+  },
+  {
+    "name": "Pharmacie Abi Abass Sebti",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Marjane",
+    "lat": 35.7464723,
+    "lng": -5.8438937
+  },
+  {
+    "name": "Pharmacie Aïn Hayyani",
+    "lat": 35.7828807,
+    "lng": -5.8282155
+  },
+  {
+    "name": "Pharmacie Narjiss",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie California",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Gueznaia",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Jamaâ Mekraa",
+    "lat": 35.7864056,
+    "lng": -5.8434019
+  },
+  {
+    "name": "Pharmacie Sidi Driss",
+    "lat": 35.732556,
+    "lng": -5.8360023
+  },
+  {
+    "name": "Pharmacie Dar Tounsi",
+    "lat": 35.7526352,
+    "lng": -5.7987885
+  },
+  {
+    "name": "Pharmacie Bait AlMakdiss",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Ben Dahmane",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Aïda",
+    "lat": 35.7750925,
+    "lng": -5.795157
+  },
+  {
+    "name": "Pharmacie AlMajd",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Bd. Mly Rachid",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Touzani",
+    "lat": 35.7585477,
+    "lng": -5.7933022
+  },
+  {
+    "name": "Pharmacie Fayna",
+    "lat": 35.7609223,
+    "lng": -5.8396961
+  },
+  {
+    "name": "Pharmacie Route ElAouma",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Sahat AlOumam",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Al Moujahidine",
+    "lat": 35.7671199,
+    "lng": -5.8477067
+  },
+  {
+    "name": "Pharmacie BenTaieb",
+    "lat": 35.767444,
+    "lng": -5.8179189
+  },
+  {
+    "name": "Pharmacie AlBalsam",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlHamd",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Ahlen",
+    "lat": 35.7470129,
+    "lng": -5.840538
+  },
+  {
+    "name": "Pharmacie AlMouna",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Rabea ElAdaouia",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie AlYasmine",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Hay AlBoughaz",
+    "lat": 35.75,
+    "lng": -5.8000002
+  },
+  {
+    "name": "Pharmacie Mountassir",
+    "lat": 35.7378531,
+    "lng": -5.7991515
+  },
+  {
+    "name": "Pharmacie Zineb",
+    "lat": 35.7342938,
+    "lng": -5.8051976
+  },
+  {
+    "name": "Pharmacie AlMarsa",
+    "lat": 35.75,
+    "lng": -5.8000002
+  }
+]
