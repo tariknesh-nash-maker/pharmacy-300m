@@ -402,12 +402,43 @@ function loadProject(state){
   }catch(e){ alert('Failed to load project: '+e.message); }
 }
 saveBtn.addEventListener('click', ()=>{ saveState(); alert('Project saved.'); });
-loadBtn.addEventListener('click', ()=>{ $1  
-  // Turn on Tangier layer by default
-  toggleTangier.checked = true;
-  toggleTangier.dispatchEvent(new Event('change'));
-}
-);
+
+loadBtn.addEventListener('click', ()=>{
+  const raw = localStorage.getItem('pharma300');
+  if (!raw) return alert('No saved project.');
+  loadProject(JSON.parse(raw));
+});
+
+exportBtn.addEventListener('click', ()=>{
+  const raw = localStorage.getItem('pharma300') || '{}';
+  const blob = new Blob([raw], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'pharmacy_project.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importFile').addEventListener('change', async (e)=>{
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const txt = await f.text();
+    const state = JSON.parse(txt);
+    localStorage.setItem('pharma300', JSON.stringify(state));
+    loadProject(state);
+  } catch(err) {
+    alert('Import failed: ' + err.message);
+  }
+});
+
+/* ---------- initMap (GLOBAL) ---------- */
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 35.7595, lng: -5.8340 },
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    mapTypeControl: true,
+    mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR, position: google.maps.ControlPosition.TOP_RIGHT },
+    streetViewControl: false
+  });
 
   // data layers (create AFTER API is loaded)
   circlesData = new google.maps.Data({ map });
@@ -443,16 +474,24 @@ loadBtn.addEventListener('click', ()=>{ $1
 
   map.addListener('click', (e)=>addPharmacy(e.latLng.lat(), e.latLng.lng()));
 
+  // language & restore
   setLangUI(langSel.value);
-
   const raw = localStorage.getItem('pharma300');
   if (raw) { try { loadProject(JSON.parse(raw)); } catch(e) {} }
 
   // Turn on Tangier layer by default
   toggleTangier.checked = true;
   toggleTangier.dispatchEvent(new Event('change'));
-} // end initMap
+
+  // Optional perf: only show circles when zoomed in
+  map.addListener('zoom_changed', () => {
+    const z = map.getZoom();
+    if (tangierCirclesLayer) tangierCirclesLayer.setMap(z >= 14 ? map : null);
+  });
+}
+
 window.initMap = initMap; // expose for callback
+
   </script>
 
   <!-- Load Google Maps (use a VALID key; enable Maps JavaScript API + Drawing) -->
