@@ -360,7 +360,16 @@ exportRecsBtn.addEventListener('click', () => {
   const a = document.createElement('a'); a.href = url; a.download = 'pharmacy_recommendations.geojson'; a.click();
   URL.revokeObjectURL(url);
 });
+/* ---------- Stats ---------- */
+function updateStats() {
+  const phCount  = (pharmacies && pharmacies.length) || 0;
+  const aoiCount = (aoiPolys && aoiPolys.length) || 0;
+  const recCount = (typeof lastRecs !== 'undefined' && lastRecs && lastRecs.length) || 0;
 
+  const el = document.getElementById('stats');
+  if (el) el.textContent = `${phCount} pharmacies • ${aoiCount} AOIs • ${recCount} recs`;
+}
+    
 /* ---------- Save / Load / Import / Export ---------- */
 function saveState(){
   const state = {
